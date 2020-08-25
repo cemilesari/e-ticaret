@@ -1,0 +1,162 @@
+
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "RESELLER" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+{% load i18n %}
+
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="alert alert-light alert-elevate" role="alert">
+			<div class="kt-portlet kt-portlet--mobile">
+				<div class="kt-portlet__head kt-portlet__head--lg">
+					<div class="kt-portlet__head-label">
+						<span class="kt-portlet__head-icon">
+						    <i class="kt-font-brand flaticon2-line-chart"></i>
+						</span>
+						<h3 class="kt-portlet__head-title">
+                         {% trans "YEMEK KALMASIN YOUR TEMPLATES" %}
+                        </h3>
+					</div>
+				    <div class="kt-portlet__head-toolbar">
+					    <a  type="button" href="{% url 'reseller:template-create' %}" class="btn btn-brand btn-icon-sm" >
+					        <i class="flaticon2-plus"></i> {% trans "Add New Template" %}
+					    </a>
+					</div>	
+			    </div>
+                <div class="kt-portlet__body">
+                		{% include 'includes/message.html' %}
+
+                    {% for template in templates %}
+                     <div class="kt-portlet__body">
+                    <div class="kt-widget kt-widget--user-profile-3">
+                        <div class="kt-widget__top">
+                            <div class="kt-widget__media kt-hidden-">
+                                {% if template.image %}
+                                <img src="{{template.image.url}}" alt="image" style="width: 200px;border-radius: 3px;height: 130px;"> {% endif %}
+                            </div>
+                            <div class="kt-widget__content">
+                                <div class="kt-widget__head">
+                                    <a href="{% url 'reseller:template_detail' template.pk %}" class="kt-widget__title">
+                                         {{template.company|upper}} - {{template.name|upper}}  <i class="flaticon2-correct"></i>
+                                        </a>
+                                    <div class="kt-widget__action">
+                                        <a type="button" href="{% url 'reseller:template_detail' template.pk %}" class="btn btn-success btn-sm btn-upper" style="background-color:#268271">
+                                            {% trans "DETAIL" %}
+                                        </a>&nbsp;
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-upper" id="delete-{{ template.id }}" onclick="delete_template({{template.id }});">
+                                            <i class="fas fa-times" style="padding:0px!important; "></i></a>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="kt-widget__info">
+                                    <div class="kt-widget__desc">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="kt-widget__item">
+                                                    <span class="kt-widget__date">
+								                        {% trans " User" %}
+							                        </span>
+                                                    <div class="kt-widget__label">
+                                                        <span class="btn btn-label-brand btn-sm btn-bold btn-upper">
+															{{template.user }}
+														</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="kt-widget__item">
+                                                    <span class="kt-widget__date">
+														{% trans " Category " %}
+													</span>
+                                                    <div class="kt-widget__label">
+                                                        <span class="btn btn-label-danger btn-sm btn-bold btn-upper">
+															{{template.category | upper }}
+														</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="kt-widget__item">
+                                                    <span class="kt-widget__subtitel" style="font-size: initial;">
+														{% trans "Template Description" %}
+													</span>
+                                                    <div class="col-md-12">
+														<span>	{{template.body|truncatechars:40}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-widget__bottom">
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <i class="far fa-check-square fa-5x" style="opacity:0.4;"></i>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </div>  
+        </div>
+	</div>
+</div>
+<!--count bulma -->
+{# {{templates|length}} #}
+<!--      //    -->
+{% endblock content %}
+{% block extrajs %}
+
+
+
+<script type="text/javascript">
+(function($){
+	window.delete_template = function (id){
+		$(document).on("click","#delete-"+id , function (e) {
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You won't be able to login from this device till you approve it again",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+				var url = "{% url 'reseller:template_delete' %}";
+				if (result.value) {
+					$.post( url, { csrfmiddlewaretoken: '{{ csrf_token }}', id: id }, function( data ) {
+						if (data.status){
+							Swal.fire(
+								'Deleted!',
+								'The Device has been deleted.',
+								'success'
+							)
+							$('#template-'+id).remove();
+						}
+						else{
+							Swal.fire(
+								'Error!',
+								'Error while deleting your device',
+								'Error'
+							)
+						}
+					});					
+				}
+			})
+		});
+	};
+})(jQuery);
+
+</script>
+
+
+
+
+
+
+{% endblock extrajs %}

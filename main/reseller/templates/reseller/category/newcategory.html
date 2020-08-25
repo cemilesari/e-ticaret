@@ -1,0 +1,90 @@
+
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Category List" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+{% load i18n %}
+{% comment "" %}
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+	<div class="kt-content kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+	        <div class="kt-container ">
+	            <div class="kt-subheader__main">
+		            <h3 class="kt-subheader__title">
+			            {% trans "New Category " %}
+                    </h3>
+       	            <div class="kt-subheader__breadcrumbs">
+	                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+	                	    <span class="kt-subheader__breadcrumbs-separator"></span>
+	                    <a href="" class="kt-subheader__breadcrumbs-link">{% trans "Category" %}</a>
+	                	    <span class="kt-subheader__breadcrumbs-separator"></span>
+	                </div>
+	            </div>
+	            <div class="kt-subheader__toolbar">
+	                <div class="kt-subheader__wrapper">
+	                    <a href="#" class="btn kt-subheader__btn-secondary">Reports</a>
+	                <div class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="Quick actions" data-placement="top">
+	                    <a href="#" class="btn btn-danger kt-subheader__btn-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
+	                <div class="dropdown-menu dropdown-menu-right">
+	                    <a class="dropdown-item" href="#"><i class="la la-plus"></i> New Product</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>
+{% endcomment %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--mobile">
+	    <div class="kt-portlet__head kt-portlet__head--lg">
+		    <div class="kt-portlet__head-label">
+			    <span class="kt-portlet__head-icon">
+				    <i class="kt-font-brand flaticon2-line-chart"></i>
+			    </span>
+			    <h3 class="kt-portlet__head-title">
+				    {% trans "New Category" %}
+				    <small>{% trans "Category" %}</small>
+			    </h3>
+		    </div>
+		<div class="kt-portlet__head-toolbar">
+            <div class="kt-portlet__head-wrapper">
+	            
+            </div>		
+        </div>
+    </div>
+    <div style="line-height:2;"  class="kt-portlet__body">
+		<form class="kt-form" action="{% url 'reseller:category_create' %}" method="post">
+                        {% csrf_token %}
+										{% include 'includes/message.html' %}
+
+						<div class="kt-wizard-v1__content">
+							<div class="kt-heading kt-heading--md">
+                                {% trans "New Category" %}
+                            </div>
+							<div class="kt-form__section kt-form__section--first">
+								<div class="kt-wizard-v1__form">
+									<div class="form-group">
+										<label>{% trans "Category" %}</label>
+										<input type="text" class="form-control" name="name" placeholder="Category" >
+										<span class="form-text text-muted">{% trans "Please enter your Category." %}</span>
+									</div>
+								
+							</div>
+						</div>
+						<div class="">
+							<button type="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" >
+								{% trans "Submit" %}
+							</button>
+						</div>
+					</form>
+
+        </div>
+            </div>
+     	</div>
+	</div>
+</div>
+
+
+{% endblock content %}
+{% block extrajs %}{% endblock extrajs %}

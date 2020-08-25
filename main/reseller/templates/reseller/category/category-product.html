@@ -1,0 +1,59 @@
+
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Category Product List" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+{% load i18n %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--mobile">
+	    <div class="kt-portlet__head kt-portlet__head--lg">
+		    <div class="kt-portlet__head-label">
+			    <span class="kt-portlet__head-icon">
+				    <i class="kt-font-brand flaticon2-line-chart"></i>
+			    </span>
+			    <h3 class="kt-portlet__head-title">
+				    {% trans "Category Product List" %}
+				    <small>{{category.name|upper}}</small>
+			    </h3>
+		    </div>
+            <div class="kt-portlet__head-toolbar">
+                <div class="kt-portlet__head-wrapper">
+                    <div class="">
+                        <a href="{% url 'reseller:category_create' %}" type="button" class="btn btn-brand btn-icon-sm" >
+                        <i class="flaticon2-plus"></i> {% trans "Add New Category" %}
+                        </a>
+                    </div>
+                </div>		
+            </div>
+        </div>
+        <div style="line-height:2;"  class="kt-portlet__body">
+            {% for product in products %}
+            {% if product.template.category.name == category.name%}
+                <div class="card mb-3" style="max-width: 1267px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="{{product.template.image.url}}" class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.template.name|upper}}</h5>
+                                <p class="card-text">{{product.template.body}}</p>
+                                <p class="card-text"><small class="text-muted">{{product.user}}  </small></p>
+                               <ul>
+                                    <li> {% trans "Original Price" %}&nbsp;{{product.original_price}}</li>
+                                    <li> {% trans "Price" %} {{product.price}}&nbsp;{{product.template.currency}}</li>
+                                    <li> {% trans "Count" %} {{product.count}}</li>
+                                    <li> {% trans "Left" %} {{product.left}}</li>
+                               </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extrajs %}{% endblock extrajs %}

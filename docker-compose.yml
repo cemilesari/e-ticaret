@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+  yemekkalmasin:
+    image: yemekkalmasin
+    build: .
+    ports:
+      - 8005:8000

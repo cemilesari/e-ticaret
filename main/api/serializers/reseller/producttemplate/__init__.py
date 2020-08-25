@@ -1,0 +1,1 @@
+from .template import ProductTemplateSerializer,ProductTemplateUCSerializer

@@ -1,0 +1,109 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Product List" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+{% load i18n %}
+
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="alert alert-light alert-elevate" role="alert">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                    <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title"> {% trans "YEMEK KALMASIN PRODUCT LIST" %}</h3>
+                </div>
+            <div class="kt-portlet__head-toolbar">
+                <a  type="button" href="{% url 'reseller:create_product' %}" class="btn btn-brand btn-icon-sm" >
+                    <i class="flaticon2-plus"></i> {% trans "Add New Product" %}
+                </a>
+            </div>	
+        </div>
+            {% include "includes/message.html" %}
+        <div class="kt-portlet__body">
+	        {% include "reseller/products/includes/search.html" %}
+                {% for product in products %}
+                    <div class="kt-portlet__body">
+                        <div class="kt-widget kt-widget--user-profile-3">
+                            <div class="kt-widget__top">
+                                <div class="kt-widget__media kt-hidden-">
+                                    {% if product.template.image%}
+                                    <img src="{{product.template.image.url}}" alt="image" style="width: 150px;height: 130px;border-radius: 5px;">
+                                    {% endif %}
+                                </div>
+                                <div class="kt-widget__content">
+                                    <div class="kt-widget__head">
+                                        <a href="{% url 'reseller:detail_product' product.pk %}" class="kt-widget__title">{{product.template|upper}}</a>
+                                        <div class="kt-widget__action">
+                                            <a type="button" href="{% url 'reseller:detail_product' product.pk %}" class="btn btn-success btn-sm btn-upper"
+                                            style="background-color:#268271">{% trans "VIEW" %}</a>&nbsp;
+                                            <a type="button" href="{% url 'reseller:update_product' product.pk %}" class="btn btn-brand btn-sm btn-upper">{% trans "EDIT" %}</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="kt-widget__info">
+                                        <div class="kt-widget__desc">
+                                        {{product.branch|upper}}
+                                            <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="kt-widget__item" >
+                                                    <span class="kt-widget__date">
+                                                        {% trans "Start Time" %}
+                                                    </span>
+                                                    <div class="kt-widget__label">
+                                                        <span class="btn btn-label-brand btn-sm btn-bold btn-upper">{{product.start_time }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="kt-widget__item">
+                                                    <span class="kt-widget__date">
+                                                        {% trans "End Time" %}
+                                                    </span>
+                                                    <div class="kt-widget__label">
+                                                        <span class="btn btn-label-danger btn-sm btn-bold btn-upper">{{product.end_time }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="kt-widget__item">
+                                                    <span class="kt-widget__date">
+                                                        {% trans "Sold Time" %}
+                                                    </span>
+                                                    <div class="kt-widget__label">
+                                                        <span class="btn btn-label-brand btn-sm btn-bold btn-upper">{{product.sold_time }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    <div class="ubau">
+                                    {{product.template.body|truncatechars:30}}
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="kt-widget__bottom"></div>
+                        </div>
+                    </div>
+	            {% empty %}
+                    <tr>
+	                    <td colspan="7" class="text-center">
+		                    <i class="far fa-check-square fa-5x" style="opacity:0.4;"></i>
+	                    </td>
+                    </tr>
+                {% endfor %}
+                {% include "reseller/includes/base/paginate.html" with page_obj=products %}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+{% block extrajs %}
+
+  {% endblock extrajs %}

@@ -1,0 +1,243 @@
+{% load static i18n %}
+<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+    <div class="kt-header-mobile__logo">
+        <a href="index.html">
+	        <img alt="Logo" style="height:80px!important;width: 130px!important;" src="{% static 'web/img/yemek-kalmasin.svg' %}"class="kt-header__brand-logo-default" />        </a>
+    </div>
+    <div class="kt-header-mobile__toolbar">
+        <button class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler"><span></span></button>
+        <button class="kt-header-mobile__toolbar-topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more-1"></i></button>
+    </div>
+</div>
+<div class="kt-grid kt-grid--hor kt-grid--root">
+    <div class=" kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+            <div id="kt_header" class="kt-header  kt-header--fixed " data-ktheader-minimize="on">
+                <div class="kt-container">
+                    <div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
+						<a class="kt-header__brand-logo" href="?page=index">
+							<img alt="Logo" style="height:55px!important;width: 80px!important;" src="{% static 'web/img/yemek-kalmasin.svg' %}"class="kt-header__brand-logo-default" />
+							<img alt="Logo" style="height:55px!important;width: 80px!important;" src="{% static 'web/img/yemek-kalmasin.svg' %}" class="kt-header__brand-logo-sticky" />
+						</a>
+					</div>
+                    <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn">
+                        <i class="la la-close"></i>
+                    </button>
+                    <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid">
+                        <div class="kt-header-menu kt-header-menu-mobile ">
+                            <ul class="kt-menu__nav ">
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel">
+                                    <a href="{% url 'web:home_view' %}" class="kt-menu__link kt-menu__toggle">
+                                        <span class="kt-menu__link-text">{% trans "Dashboard" %}</span>
+                                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel kt-menu__item--here" >
+                                    <a href="{% url 'reseller:profile_view' %}" class="kt-menu__link kt-menu__toggle">
+                                        <span class="kt-menu__link-text">{% trans "Reseller" %}</span>
+                                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </a>
+                                </li>
+                                 <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" >
+                                    <a href="{% url 'reseller:addresse_create' %}" class="kt-menu__link kt-menu__toggle">
+                                        <span class="kt-menu__link-text">{% trans "Profile" %}</span>
+                                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" >
+                                    <a href="{% url 'reseller:category_view' %}" class="kt-menu__link kt-menu__toggle">
+                                        <span class="kt-menu__link-text">{% trans "Categories" %}</span>
+                                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </a>
+                                </li>
+                               <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" >
+                                    <a href="{% url 'reseller:template_list' %}" class="kt-menu__link kt-menu__toggle">
+                                        <span class="kt-menu__link-text">{% trans "Templates" %}</span>
+                                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" >
+                                    <a href="{% url 'reseller:product_list' %}" class="kt-menu__link kt-menu__toggle">
+                                        <span class="kt-menu__link-text">{% trans "Products" %}</span>
+                                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" >
+                                    <a href="{% url 'reseller:company_list' %}" class="kt-menu__link kt-menu__toggle">
+                                        <span class="kt-menu__link-text">{% trans "Company" %}</span>
+                                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" >
+                                    <a href="#" class="kt-menu__link kt-menu__toggle">
+                                        <span class="kt-menu__link-text">{% trans "Orders" %}</span>
+                                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" >
+                                    <a href="{% url 'tickets:tickets_list_view' %}" class="kt-menu__link kt-menu__toggle">
+                                        <span class="kt-menu__link-text">{% trans "Tickets" %}</span>
+                                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="kt-header__topbar kt-grid__item">
+                        <div class="kt-header__topbar-item dropdown">
+                    </div>
+                        <div class="kt-header__topbar-item kt-header__topbar-item--langs">
+                            <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
+                                <span class="kt-header__topbar-icon">
+                                    {% include 'web/includes/turkey.svg' %}
+                                </span>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim">
+                                <ul class="kt-nav kt-margin-t-10 kt-margin-b-10">
+                                    <li class="kt-nav__item kt-nav__item--active">
+                                        <a href="#" class="kt-nav__link">
+                                            <span class="kt-nav__link-icon">{% include 'web/includes/turkey.svg' %}</span>
+                                            <span class="kt-nav__link-text">{% trans "English" %}</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link">
+                                            <span class="kt-nav__link-icon">{% include 'web/includes/turkey.svg' %}</span>
+                                            <span class="kt-nav__link-text">{% trans "Spanish" %}</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link">
+                                            <span class="kt-nav__link-icon">{% include 'web/includes/turkey.svg' %}</span>
+                                            <span class="kt-nav__link-text">{% trans "German" %}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                            <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
+                                <span  class="kt-header__topbar-icon"><b>{{user.username.0|upper}}</b></span>
+                                <img alt="Pic" src="assets/media/users/300_21.jpg" class="kt-hidden" />
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+                                <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-image:url('{{STATIC_URL}}web/img/bg-1.jpg');">
+                                    <div class="kt-user-card__avatar">
+                                        <img class="kt-hidden" alt="Pic" src="assets/media/users/300_25.jpg" />
+                                        <span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">{{user.full_name.0}}</span>
+                                    </div>
+                                    <div class="kt-user-card__name">
+                                        {{user.full_name}}
+                                    </div>
+                                    <div class="kt-user-card__badge">
+                                        <span class="btn btn-success btn-sm btn-bold btn-font-md">
+                                        {% trans "example" %}</span>
+                                    </div>
+                                    </div>
+                                    <div class="kt-notification">
+                                        <a href="{% url 'reseller:addresse_create' %}" class="kt-notification__item">
+                                            <div class="kt-notification__item-icon">
+                                                <i class="flaticon2-calendar-3 kt-font-success"></i>
+                                            </div>
+                                            <div class="kt-notification__item-details">
+                                               <div class="kt-notification__item-title kt-font-bold">
+                                                    {% trans "My Profile" %}
+                                                </div>
+                                                <div class="kt-notification__item-time">
+                                                    {% trans "Account settings and more" %}
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="{% url 'reseller:profile_view' %}" class="kt-notification__item">
+                                            <div class="kt-notification__item-icon">
+                                                        <i class="flaticon2-rocket-1 kt-font-danger"></i>
+                                                    </div>
+                                                    <div class="kt-notification__item-details">
+                                                        <div class="kt-notification__item-title kt-font-bold">
+                                                            {% trans "Reseller" %}
+                                                        </div>
+                                                        <div class="kt-notification__item-time">
+                                                            {% trans "Account view" %}
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                        <a href="{% url 'tickets:tickets_list_view' %}" class="kt-notification__item">
+                                            <div class="kt-notification__item-icon">
+                                                <i class="flaticon2-mail kt-font-warning"></i>
+                                            </div>
+                                            <div class="kt-notification__item-details">
+                                                <div class="kt-notification__item-title kt-font-bold">
+                                                    {% trans "My Tickets" %}
+                                                </div>
+                                                <div class="kt-notification__item-time">
+                                                    {% trans "Inbox and tasks" %}
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="{% url 'reseller:product_list' %}" class="kt-notification__item">
+                                            <div class="kt-notification__item-icon">
+                                                <i class="flaticon2-hourglass kt-font-brand"></i>
+                                            </div>
+                                            <div class="kt-notification__item-details">
+                                                <div class="kt-notification__item-title kt-font-bold">
+                                                    {% trans "My Products" %}
+                                                </div>
+                                                <div class="kt-notification__item-time">
+                                                    {% trans "Products List" %}
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="custom/apps/user/profile-1/overview.html" class="kt-notification__item">
+                                            <div class="kt-notification__item-icon">
+                                                <i class="flaticon2-cardiogram kt-font-warning"></i>
+                                            </div>
+                                            <div class="kt-notification__item-details">
+                                                <div class="kt-notification__item-title kt-font-bold">
+                                                    {% trans "Orders" %}
+                                                </div>
+                                                <div class="kt-notification__item-time">
+                                                    {% trans "Orders List" %}
+                                                    <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded">{% trans "example" %}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="kt-notification__custom kt-space-between">
+                                            <a href="{% url 'users:logout_view' %}" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">{% trans "Sign Out" %}</a>
+                                            <a href="{% url 'reseller:change_password' %}" target="_blank" class="btn btn-clean btn-sm btn-bold">{% trans "Change Password" %}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+            <div class="kt-content kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+                <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+                    <div class="kt-container ">
+                        <div class="kt-subheader__main">
+                            <h3 class="kt-subheader__title">
+                                {% trans "Dashboard" %} </h3>
+                            <div class="kt-subheader__breadcrumbs">
+                                <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                                <span class="kt-subheader__breadcrumbs-separator"></span>
+                                <a href="" class="kt-subheader__breadcrumbs-link">
+                                    {% trans "Yemek Kalmasın" %} </a>
+                                {#  <span class="kt-subheader__breadcrumbs-separator"></span>#}
+                                {# <a href="" class="kt-subheader__breadcrumbs-link">Default Dashboard </a> #}
+                            </div>
+                        </div>
+                        <div class="kt-subheader__toolbar">
+                            <div class="kt-subheader__wrapper">
+                                <div>
+                                    <a href="{% url 'reseller:create_product' %}" style="background-color:#fd1361;" class="btn btn-danger kt-subheader__btn-options">
+                                       {% trans "New Product" %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--ilk harf büyük:capfirst   https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#ref-templates-builtins-filters-->

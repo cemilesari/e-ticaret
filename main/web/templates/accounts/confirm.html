@@ -1,0 +1,65 @@
+{% extends 'auth/base.html' %}
+{% load i18n static %}
+{% block title %}{% trans "Confirmation" %}{% endblock %}
+{% block extracss %}
+<style type="text/css">
+.success-page{
+  max-width:800px;
+  display:block;
+  margin: 0 auto;
+  text-align: center;
+      position: relative;
+    margin-top: 190px;
+}
+.success-page img{
+  max-width:400px;
+  display: block;
+  margin: 0 auto;
+}
+
+.btn-view-orders{
+  display: block;
+  border:1px solid #47c7c5;
+  width:100px;
+  margin: 0 auto;
+  margin-top: 45px;
+  padding: 10px;
+  color:#5149bf;
+  background-color:#42d29f;
+  text-decoration: none;
+  margin-bottom: 20px;
+      font-size: large;
+}
+h2{
+  color:#47c7c5;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    
+
+}
+a{
+  text-decoration: none;
+}
+p {
+    margin-top: 0;
+    color: cornsilk;
+    margin-bottom: 1rem;
+    font-size: large;
+}
+</style>
+{% endblock extracss %}
+{% block content %}
+<body style="background-image: url('{{STATIC_URL}}web/img/header-1.jpg'); background-position: center top; " 
+class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+
+<div class="success-page">
+   <img  src="http://share.ashiknesin.com/green-checkmark.png" class="center" alt="" />
+  <h2>{% trans "Please confirm your email address to complete the registration" %}</h2>
+  <img src="{% static 'web/img/undraw_e.svg' %}">
+</div>
+</div>
+{% endblock content %}
+
+{% block extrajs %}
+
+{% endblock extrajs %}

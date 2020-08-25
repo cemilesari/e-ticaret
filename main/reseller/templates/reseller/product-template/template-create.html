@@ -1,0 +1,147 @@
+
+
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "RESELLER" %}{% endblock title %}
+{% block extracss %}<link rel="stylesheet" type="text/css" href="{% static 'web/css/wizard.css' %}" />
+{% endblock extracss %}
+{% block content %}
+
+{% comment "" %}
+{% include "reseller/includes/profile/header.html" %}
+
+{% endcomment %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="kt-portlet">
+		<div class="kt-portlet__body kt-portlet__body--fit">
+	        {% include "reseller/includes/profile/base.html" %}
+			<div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
+				<form class="needs-validation kt-form" action="{% url 'reseller:template-create' %}" enctype="multipart/form-data" method="post" novalidate>
+					{% csrf_token %}
+					{% include 'includes/message.html' %}
+					<div class="kt-wizard-v1__content">
+						<div class="kt-heading kt-heading--md">
+							{% trans "Create Your Product Template" %}
+						</div>
+						<div class="kt-form__section kt-form__section--first">
+							<div class="kt-wizard-v1__form">
+								<div class="form-group m-form__group row">
+									<div class="col-lg-6">
+										<label class="form-label">{% trans "Product Template  Image" %}</label>
+										<div class="custom-file">
+											<input type="file" name="image" class="custom-file-input" required>
+											<label class="custom-file-label">{% trans "Choose  img" %}</label>
+											<span class="form-text text-muted">{% trans "Please choice template image" %}</span>
+										</div>
+									</div>
+									<div class="col-xl-6">
+										<div class="form-group">
+											<label>{% trans "Template Name" %}</label>
+											<input type="text" class="form-control" name="name" placeholder="Template Name" required>
+											<span class="form-text text-muted">{% trans "Please enter your Company Name" %}</span>
+										</div>
+									</div>
+									<div class="col-xl-12">
+										<div class="form-group">
+											<label>{% trans "Template Description" %}</label>
+											<input type="text" class="form-control" name="body" placeholder="Template Description" required>
+											<span class="form-text text-muted">{% trans "Please enter your company information" %}</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group m-form__group row">
+									<div class="col-xl-3">
+										<div class="form-group">
+											<label>{% trans "Left" %}</label>
+												<input type="number" class="form-control" name="left" placeholder="Left" required>
+											<span class="form-text text-muted">{% trans "Please enter your company information" %}</span>
+										</div>
+									</div>
+									<div class="col-xl-3">
+										<div class="form-group">
+										<label>{% trans "Count" %}</label>
+											<input type="number" class="form-control" name="count" placeholder="Count" required>
+											<span class="form-text text-muted">{% trans "Please enter your company information" %}</span>
+										</div>
+									</div>
+									<div class="col-xl-3">
+										<div class="form-group">
+										<label>{% trans "Original Price" %}</label>
+											<input type="number" class="form-control" name="original_price" placeholder="Original Price" required>
+											<span class="form-text text-muted">{% trans "Please enter your company information" %}</span>
+										</div>
+									</div>
+									<div class="col-xl-3">
+										<div class="form-group">
+										<label>{% trans "Price" %}</label>
+											<input type="number" class="form-control" name="price" placeholder="Price" required>
+											<span class="form-text text-muted">{% trans "Please enter your company information" %}</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group m-form__group row">
+									<div class="col-xl-3">
+										<div class="form-group">
+											<label>{% trans "Status" %}</label>
+											<select id="inputState" name="status" class="form-control" required>
+												{% for status in statuses %}
+													<option value="{{ status.0 }}">
+												{{ status.1 }}
+												</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="col-xl-3">
+										<div class="form-group">
+											<label>{% trans "Curreny" %}</label>
+										<select id="inputState" name="currency" class="form-control" required>
+												{% for currency in currencies %}
+													<option value="{{ currency.0 }}">
+												{{ currency.1 }}
+												</option>
+												{% endfor %}
+										</select>
+										</div>
+									</div>
+									<div class="col-xl-3">
+										<div class="form-group">
+											<label >{% trans "Company" %}</label>
+											<select id="inputState" name="company" class="form-control" required>
+												{% for company in companies %}
+													<option value="{{ company.id }}">
+													{{ company.name | upper }}
+													</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="col-xl-3">
+										<div class="form-group">
+											<label >{% trans "Category" %}</label>
+											<select id="inputState" name="category" class="form-control" required>
+												{% for category in categories %}
+													<option value="{{ category.id }}">
+													{{ category.name | upper }}
+													</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="">
+						<button type="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" >
+							{% trans "Submit" %}
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+{% block extrajs %}{% endblock extrajs %}

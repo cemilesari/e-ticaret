@@ -1,0 +1,124 @@
+
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "RESELLER" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+{% load i18n %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="alert alert-light alert-elevate" role="alert">
+		<div class="kt-portlet kt-portlet--mobile">
+			<div class="kt-portlet__head kt-portlet__head--lg">
+				<div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+					    <i class="kt-font-brand flaticon2-line-chart"></i>
+					</span>
+					<h3 class="kt-portlet__head-title"> {% trans "YEMEK KALMASIN PRODUCT TEMPLATE DETAIL" %}</h3>
+				</div>
+				<div class="kt-portlet__head-toolbar">
+					<div class="kt-portlet__head-wrapper">
+				</div>
+			</div>	
+		</div>
+    <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0"> {{template.name|upper}}</h3>
+            </div>
+            <div class="col-4 text-right">
+              <a href="{% url "reseller:template_update" template.pk %}" class="btn btn-sm btn-info">{% trans "Update" %}</a>
+              <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-upper" id="delete-{{ template.id }}" 
+			  onclick="delete_template({{ template.id }});" style="background-color:#fd1361;">{% trans "Delete" %}</a>
+              <a href="{% url 'reseller:template_list' %}" class="btn btn-sm btn-primary">{% trans "View All" %}</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+		<div class="row">
+			<div class="col-md-8">
+				<dl class="row" style="    font-size: medium;">
+					<dt class="col-sm-3" style="color:#5578eb!important;"><i  style="color:black!important;" class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;
+					{% trans "User"%}</dt>
+					<dd class="col-sm-9">{{template.user|upper}}</dd>
+					<br />
+					<dt class="col-sm-3" style="color:#5578eb!important;"><i style="color:black!important;" class="fa fa-angle-double-down"></i>&nbsp;&nbsp;&nbsp;
+					{% trans "Left"%}</dt>
+					<dd class="col-sm-9">{{template.left}}</dd>
+					<br />	
+					<dt class="col-sm-3" style="color:#5578eb!important;"><i  style="color:black!important;" class="fa fa-sort-amount-up"></i>&nbsp;&nbsp;&nbsp;
+					{% trans "Count"%}</dt>
+					<dd class="col-sm-9">{{template.count}}</dd>
+					<br />
+					<dt class="col-sm-3" style="color:#5578eb!important;"><i  style="color:black!important;" class="fa fa-greater-than"></i>&nbsp;&nbsp;&nbsp;
+					{% trans "Original Price"%}</dt>
+					<dd class="col-sm-9">{{template.original_price}}&nbsp;{{template.currency}}</dd>
+					<br />
+					<dt class="col-sm-3" style="color:#5578eb!important;"><i  style="color:black!important;" class="fa fa-greater-than-equal"></i>&nbsp;&nbsp;&nbsp;
+					{% trans "Price" %}</dt>
+					<dd class="col-sm-9">{{template.price}}&nbsp;{{template.currency}}</dd>
+					<br />
+					<dt class="col-sm-3" style="color:#5578eb!important;"><i  style="color:black!important;" class="fa fa-play"></i>&nbsp;&nbsp;&nbsp;
+					{% trans "Status"%}</dt>
+					<dd class="col-sm-9">{{template.status|upper}}</dd>
+					<br />
+					<dt class="col-sm-3" style="color:#5578eb!important;"><i  style="color:black!important;" class="fa fa-hourglass"></i>&nbsp;&nbsp;&nbsp;
+					{% trans "Created"%}</dt>
+					<dd class="col-sm-9">{{ template.created|timesince }}&nbsp;{% trans "ago" %}</dd>
+			        
+				</dl>
+       		 </div>
+			<div class="col-md-4">
+				<img src="{{template.image.url}}" alt="image" style="width:280px;margin: 30px;margin-left: -100px; ">
+			</div>
+		</div>
+   		 </div>
+ 	</div>
+</div>
+</div>
+</div>
+
+
+
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript">
+(function($){
+	window.delete_template = function (id){
+		$(document).on("click","#delete-"+id , function (e) {
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You won't be able to login from this device till you approve it again",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+				var url = "{% url 'reseller:template_delete' %}";
+				if (result.value) {
+					$.post( url, { csrfmiddlewaretoken: '{{ csrf_token }}', id: id }, function( data ) {
+						if (data.status){
+							Swal.fire(
+								'Deleted!',
+								'The Template has been deleted.',
+								'success'
+							)
+							$('#template-'+id).remove();
+						}
+						else{
+							Swal.fire(
+								'Error!',
+								'Error while deleting your device',
+								'Error'
+							)
+						}
+					});					
+				}
+			})
+		});
+	};
+})(jQuery);
+
+</script>
+{% endblock extrajs %}

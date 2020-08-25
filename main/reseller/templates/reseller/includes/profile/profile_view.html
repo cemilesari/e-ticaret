@@ -1,0 +1,872 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "RESELLER" %}{% endblock title %}
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-glow/all.min.css" />
+<style type="text/css">
+    .pb-product-details-ul {
+        list-style-type: none;
+        padding-left: 0;
+        color: black;
+    }
+
+        .pb-product-details-ul > li {
+            padding-bottom: 5px;
+            font-size: 15px;
+        }
+
+    #gradient {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffff+0,ddf1f9+31,a0d8ef+62 */
+        background: #feffff; /* Old browsers */
+        background: -moz-linear-gradient(left, #feffff 0%, #ddf1f9 31%, #a0d8ef 62%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left, #feffff 0%,#ddf1f9 31%,#a0d8ef 62%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right, #feffff 0%,#ddf1f9 31%,#a0d8ef 62%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#a0d8ef',GradientType=1 ); /* IE6-9 */
+        border: 1px solid #f2f2f2;
+        padding: 20px;
+    }
+
+    #hits {
+        border-right: 1px solid white;
+        border-left: 1px solid white;
+        vertical-align: middle;
+        padding-top: 15px;
+        font-size: 17px;
+        color: white;
+    }
+
+    #fan {
+        vertical-align: middle;
+        padding-top: 15px;
+        font-size: 17px;
+        color: white;
+    }
+
+    .pb-product-details-fa > span {
+        padding-top: 20px;
+    }
+    
+</style>{% endblock extracss %}
+{% block content %}
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+	<div class="kt-content kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-container  kt-grid__item kt-grid__item--fluid">
+            <div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
+                <button class="kt-app__aside-close" id="kt_user_profile_aside_close">
+                    <i class="la la-close"></i>
+                </button>
+                <div class="kt-grid__item kt-app__toggle kt-app__aside" id="kt_user_profile_aside">
+                    <div class="kt-portlet kt-portlet--height-fluid-">
+                        <div class="kt-portlet__head  kt-portlet__head--noborder">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit-y">
+                            <!--begin::Widget -->
+                            <div class="kt-widget kt-widget--user-profile-1">
+                                <div class="kt-widget__head">
+                                    <div class="kt-widget__media">
+                                    {% include 'reseller/includes/profile/account (1).svg' %}
+                                    </div>
+                                    <div class="kt-widget__content">
+                                        <div class="kt-widget__section">
+                                            <a href="#" class="kt-widget__username">
+                                                {{request.user.full_name|upper}}
+                                                <i class="flaticon2-correct kt-font-success"></i>
+                                            </a>
+                                            <span class="kt-widget__subtitle">
+                                               {% trans "Total Product" %}: {{products|length}}
+                                            </span>
+                                        </div>
+                                        <div class="kt-widget__action">
+                                            <a href="{% url 'reseller:create_product' %}" style="background-color:#1d49d8;" type="submit" class="btn btn-info btn-sm">{% trans "New Product" %}</a>&nbsp;
+                                            <!--<button type="button" class="btn btn-success btn-sm">follow</button>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kt-widget__body">
+                                    <div class="kt-widget__content">
+                                        <div class="kt-widget__info">
+                                            <span class="kt-widget__label">{% trans "Email:" %}</span>
+                                            <a href="#" class="kt-widget__data">{{request.user.email}}</a>
+                                        </div>
+                                        <div class="kt-widget__info">
+                                            <span class="kt-widget__label">{% trans "Phone" %}:</span>
+                                            <a href="#" class="kt-widget__data">44(76)34254578</a>
+                                        </div>
+                                        <div class="kt-widget__info">
+                                            <span class="kt-widget__label">{% trans "Location" %}:</span>
+                                            <span class="kt-widget__data">{% trans "Melbourne" %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__items">
+                                        <a href="{% url 'reseller:addresse_create' %}" class="kt-widget__item kt-widget__item--active">
+                                            <span class="kt-widget__section">
+                                                <span class="kt-widget__icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                            <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                            <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3"></path>
+                                                        </g>
+                                                    </svg> </span>
+                                                <span class="kt-widget__desc">
+                                                {% trans "Profile Overview" %}
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <a href="#locations" class="kt-widget__item ">
+                                            <span class="kt-widget__section">
+                                                <span class="kt-widget__icon">
+                                                {% include 'reseller/includes/profile/route.svg' %}
+                                                </span>
+                                                <span class="kt-widget__desc">
+                                                  {% trans "Locations" %}
+                                                </span>
+                                            </span>
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder">{{locations|length}}</span>
+                                        </a>
+                                        <a href="#" class="kt-widget__item ">
+                                            <span class="kt-widget__section">
+                                                <span class="kt-widget__icon">
+                                                {% include 'reseller/includes/profile/work.svg' %}
+                                                </span>
+                                                <span class="kt-widget__desc">
+                                                 {% trans "Companies" %}
+                                                </span>
+                                            </span>
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder">{{companies|length}}</span>
+                                        </a>
+                                        <a href="#" class="kt-widget__item ">
+                                            <span class="kt-widget__section">
+                                                <span class="kt-widget__icon">
+                                                {% include 'reseller/includes/profile/branch.svg' %}
+                                                </span>
+                                                <span class="kt-widget__desc">
+                                                    {% trans "Branches" %}
+                                                </span>
+                                            </span>
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder">{{branches|length}}</span>
+
+                                        </a>
+                                        <a href="#template" class="kt-widget__item" data-toggle="kt-tooltip" title="" data-placement="right" data-original-title="Coming soon...">
+                                            <span class="kt-widget__section">
+                                                <span class="kt-widget__icon">
+                                                {% include 'reseller/includes/profile/temp.svg' %}
+                                                </span>
+                                                <span class="kt-widget__desc">
+                                                    {% trans "Product Templates" %} 
+                                                </span>
+                                            </span>
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder">{{templates|length}}</span>
+                                        </a>
+                                         <a href="#" class="kt-widget__item ">
+                                            <span class="kt-widget__section">
+                                                <span class="kt-widget__icon">
+                                                {% include 'reseller/includes/profile/product.svg' %}
+                                                </span>
+                                                <span class="kt-widget__desc">
+                                                 {% trans "Products" %}
+                                                </span>
+                                            </span>
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder">{{companies|length}}</span>
+                                        </a>
+                                         <a href="#" class="kt-widget__item ">
+                                            <span class="kt-widget__section">
+                                                <span class="kt-widget__icon">
+                                                {% include 'reseller/includes/profile/choices.svg' %}
+                                                </span>
+                                                <span class="kt-widget__desc">
+                                                 {% trans "Orders" %}
+                                                </span>
+                                            </span>
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder">{{companies|length}}</span>
+                                        </a>
+                                        <a href="#" class="kt-widget__item" data-toggle="kt-tooltip" title="" data-placement="right" data-original-title="Coming soon...">
+                                            <span class="kt-widget__section">
+                                                <span class="kt-widget__icon">
+                                                  {% include 'reseller/includes/profile/like.svg' %}
+                                                </span>
+                                                <span class="kt-widget__desc">
+                                                  {% trans "Favorits" %}
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <a href="{% url 'reseller:change_password' %}" class="kt-widget__item" data-toggle="kt-tooltip" title="" data-placement="right" data-original-title="Coming soon...">
+                                            <span class="kt-widget__section">
+                                                <span class="kt-widget__icon">
+                                                  {% include 'reseller/includes/profile/passw.svg' %}
+                                                </span>
+                                                <span class="kt-widget__desc">
+                                                  {% trans "Change Password" %}
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-grid__item kt-grid__item--fluid kt-app__content">
+                    <div class="row">
+                        <div  id="compvbran" class="col-xl-6">
+                            <div class="kt-portlet kt-portlet--height-fluid">
+                                <div class="kt-portlet__head">
+                                    <div class="kt-portlet__head-label">
+                                        <h3 class="kt-portlet__head-title">
+                                            {% trans "Companies & Branches" %}
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="kt-portlet__body kt-portlet__body--fluid" style="color: #1d2988;">
+                                    <div class="kt-widget12">
+                                     {% for company in companies%}
+                                        <div class="kt-widget12__content">
+                                            <div class="kt-widget12__item">
+                                                <div class="kt-widget12__info">
+                                                    <span class="kt-widget12__value">
+                                                        <a style="color: #1d2988;" href="{% url 'reseller:detail_company' company.pk %}">
+                                                          {% if company.logo %}
+                                                          <img style="width:50px;height:50px;"src="{{company.logo.url}}" alt="image">
+                                                          {% endif %}
+                                                            {{company.name|upper}}
+                                                        </a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {% for br in branches%}
+                                            {% if br.company == company%}
+                                            <a href="{% url 'reseller:detail_branch' br.pk %}" style="line-height:45px;color:#1d255f!important;">
+                                            {% include 'reseller/includes/profile/tick.svg' %}&nbsp;
+                                            {{br.name|upper}}</a>
+                                            {{br.location.city}}&nbsp;/&nbsp;{{br.location.state}}
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                         {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div id="template"  class="col-xl-6">
+                            <div class="kt-portlet kt-portlet--height-fluid">
+                                <div class="kt-portlet__head">
+                                    <div class="kt-portlet__head-label">
+                                        <h3 class="kt-portlet__head-title">
+                                           {% trans "Product Templates" %}
+                                        </h3>
+                                    </div>
+                                </div>
+                                {% for temp in templates%}
+                                <div class="kt-portlet__body" style="padding:15px!important;">
+                                    <div class="kt-widget4">
+                                        <div class="kt-widget4__item">
+                                            <span class="kt-widget4__icon">
+                                                {% if temp.image %}
+                                                <img style="width:50px;height:50px;"src="{{temp.image.url}}" alt="image">
+                                                {% endif %}
+                                            </span>
+                                            <a href="{% url 'reseller:template_detail' temp.pk %}" class="kt-widget4__title kt-widget4__title--light">
+                                                {{temp.name|upper}}&nbsp;&nbsp;{% trans "TEMPLATE" %}
+                                            </a>
+                                            <span class="kt-widget4__number kt-font-info">{{temp.product}}</span>
+                                        </div>
+                                        <div class="kt-widget4__item" style="padding:none!important;">
+                                            <span class="kt-widget4__icon">
+                                                <i class="flaticon2-line-chart kt-font-danger"></i>
+                                            </span>
+                                            <a class="kt-widget4__title kt-widget4__title--light">
+                                          {{temp.category|upper}}
+                                            </a>
+                                            <span class="kt-widget4__number kt-font-danger"> {{temp.currency}}</span>
+                                        </div>
+                                        <div class="kt-widget4__item">
+                                            <span class="kt-widget4__icon">
+                                            </span>
+                                            <a class="kt-widget4__title kt-widget4__title--light">
+                                            {% trans "Description" %} {{temp.body}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                    {% endfor%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="product" class="col-xl-6">
+                            <!--begin:: Widgets/Notifications-->
+                            <div class="kt-portlet kt-portlet--height-fluid">
+                                <div class="kt-portlet__head">
+                                    <div class="kt-portlet__head-label">
+                                        <h3 class="kt-portlet__head-title">
+                                           {% trans "Products" %}
+                                        </h3>
+                                    </div>
+                                    <div class="kt-portlet__head-toolbar">
+                                        <ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#kt_widget6_tab1_content" role="tab">
+                                                    {% trans "Latest" %}
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#kt_widget6_tab2_content" role="tab">
+                                                    {% trans "Week" %}
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#kt_widget6_tab3_content" role="tab">
+                                                    {% trans "Month" %}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="kt-portlet__body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="kt_widget6_tab1_content" aria-expanded="true">
+                                            <div class="kt-notification">
+                                            {% for product in product_day %}
+                                                <a href="{% url 'reseller:detail_product' product.pk %}" class="kt-notification__item">
+                                                    <div class="kt-notification__item-icon">
+                                                    {% if product.template.image.url %}
+                                                        <img style="width:30px;height:30px;"src="{{product.template.image.url}}" alt="image">
+                                                    {% endif %}
+                                                    </div>
+                                                    <div class="kt-notification__item-details">
+                                                        <div class="kt-notification__item-title">
+                                                            {{product.template.name}}
+                                                        </div>
+                                                        <div class="kt-notification__item-time">
+                                                            {{product.created|time:"h:i a"|upper }} 
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="kt_widget6_tab2_content" aria-expanded="false">
+                                            <div class="kt-notification">
+                                              {% for product in product_week %}
+                                                <a href="{% url 'reseller:detail_product' product.pk %}" class="kt-notification__item">
+                                                    <div class="kt-notification__item-icon">
+                                                    {% if product.template.image.url %}
+                                                        <img style="width:30px;height:30px;"src="{{product.template.image.url}}" alt="image">
+                                                    {% endif %}
+                                                    </div>
+                                                    <div class="kt-notification__item-details">
+                                                        <div class="kt-notification__item-title">
+                                                            {{product.template.name}}
+                                                        </div>
+                                                        <div class="kt-notification__item-time">
+                                                            {{product.created|time:"h:i a"|upper }} 
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="kt_widget6_tab3_content" aria-expanded="false">
+                                            <div class="kt-notification">
+                                              {% for product in product_year %}
+                                                <a href="{% url 'reseller:detail_product' product.pk %}" class="kt-notification__item">
+                                                    <div class="kt-notification__item-icon">
+                                                    {% if product.template.image.url %}
+                                                        <img style="width:30px;height:30px;"src="{{product.template.image.url}}" alt="image">
+                                                    {% endif %}
+                                                    </div>
+                                                    <div class="kt-notification__item-details">
+                                                        <div class="kt-notification__item-title">
+                                                            {{product.template.name}}
+                                                        </div>
+                                                        <div class="kt-notification__item-time">
+                                                            {{product.created|time:"h:i a"|upper }} 
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end:: Widgets/Notifications-->
+                        </div>
+                         <div id="order" class="col-xl-6">
+                            <div class="kt-portlet kt-portlet--tabs kt-portlet--height-fluid">
+                                <div class="kt-portlet__head">
+                                    <div class="kt-portlet__head-label">
+                                        <h3 class="kt-portlet__head-title">
+                                           {% trans "Orders" %}
+                                        </h3>
+                                    </div>
+                                    <div class="kt-portlet__head-toolbar">
+                                        <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-brand" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#kt_widget2_tab1_content" role="tab">
+                                                    Today
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#kt_widget2_tab2_content" role="tab">
+                                                    Week
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#kt_widget2_tab3_content" role="tab">
+                                                    Month
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="kt-portlet__body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="kt_widget2_tab1_content">
+                                            <div class="kt-widget2">
+                                                <div class="kt-widget2__item kt-widget2__item--primary">
+                                                    <div class="kt-widget2__checkbox">
+                                                        <label class="kt-checkbox kt-checkbox--solid kt-checkbox--single">
+                                                            <input type="checkbox">
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="kt-widget2__info">
+                                                        <a href="#" class="kt-widget2__title">
+                                                            Make Metronic Great Again.Lorem Ipsum Amet
+                                                        </a>
+                                                        <a href="#" class="kt-widget2__username">
+                                                            By Bob
+                                                        </a>
+                                                    </div>
+                                                    <div class="kt-widget2__actions">
+                                                        <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown">
+                                                            <i class="flaticon-more-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="kt_widget2_tab2_content">
+                                            <div class="kt-widget2">
+                                                <div class="kt-widget2__item kt-widget2__item--success">
+                                                    <div class="kt-widget2__checkbox">
+                                                        <label class="kt-checkbox kt-checkbox--solid kt-checkbox--single">
+                                                            <input type="checkbox">
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="kt-widget2__info">
+                                                        <a href="#" class="kt-widget2__title">
+                                                            Make Metronic Development.Lorem Ipsum
+                                                        </a>
+                                                        <a class="kt-widget2__username">
+                                                            By James
+                                                        </a>
+                                                    </div>
+                                                    <div class="kt-widget2__actions">
+                                                        <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown">
+                                                            <i class="flaticon-more-1"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
+                                                            <ul class="kt-nav">
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-line-chart"></i>
+                                                                        <span class="kt-nav__link-text">Reports</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-send"></i>
+                                                                        <span class="kt-nav__link-text">Messages</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-pie-chart-1"></i>
+                                                                        <span class="kt-nav__link-text">Charts</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-avatar"></i>
+                                                                        <span class="kt-nav__link-text">Members</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-settings"></i>
+                                                                        <span class="kt-nav__link-text">Settings</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="kt_widget2_tab3_content">
+                                            <div class="kt-widget2">
+                                                <div class="kt-widget2__item kt-widget2__item--warning">
+                                                    <div class="kt-widget2__checkbox">
+                                                        <label class="kt-checkbox kt-checkbox--solid kt-checkbox--single">
+                                                            <input type="checkbox">
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="kt-widget2__info">
+                                                        <a href="#" class="kt-widget2__title">
+                                                            Make Metronic Development. Lorem Ipsum
+                                                        </a>
+                                                        <a class="kt-widget2__username">
+                                                            By James
+                                                        </a>
+                                                    </div>
+                                                    <div class="kt-widget2__actions">
+                                                        <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown">
+                                                            <i class="flaticon-more-1"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
+                                                            <ul class="kt-nav">
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-line-chart"></i>
+                                                                        <span class="kt-nav__link-text">Reports</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-send"></i>
+                                                                        <span class="kt-nav__link-text">Messages</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-pie-chart-1"></i>
+                                                                        <span class="kt-nav__link-text">Charts</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-avatar"></i>
+                                                                        <span class="kt-nav__link-text">Members</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="kt-nav__item">
+                                                                    <a href="#" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon flaticon2-settings"></i>
+                                                                        <span class="kt-nav__link-text">Settings</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end:: Widgets/Tasks -->
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div id="locations"class="col-xl-6">
+                            <!--begin:: Locations-->
+                            <div class="kt-portlet kt-portlet--height-fluid">
+                                <div class="kt-portlet__head">
+                                    <div class="kt-portlet__head-label">
+                                        <h3 class="kt-portlet__head-title">
+                                           {% trans "Locations" %}
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="kt-portlet__body">
+                                    <!--begin::widget 12-->
+                                    <div class="kt-widget4">
+                                    {% for loc in locations%}
+                                        <div class="kt-widget4__item">
+                                            <span class="kt-widget4__icon">
+                                                {% include "reseller/includes/profile/pin.svg" %}
+                                            </span>
+                                            <a href="{% url 'reseller:addresse_detail' loc.pk %}" class="kt-widget4__title kt-widget4__title--light">
+                                             {{loc.city|upper}}-{{loc.state|upper}}
+                                            </a>
+                                            <span class="kt-widget4__number kt-font-info">{% trans "by" %}&nbsp;{{loc.user}}</span>
+                                        </div>
+                                        <div class="kt-widget4__item">
+                                            <span class="kt-widget4__icon">
+                                                {% include "reseller/includes/profile/marker.svg" %}
+                                            </span>
+                                            <a class="kt-widget4__title kt-widget4__title--light">
+                                               {{loc.address}}
+                                            </a>
+                                        </div>
+                                        <div class="kt-widget4__item">
+                                            <span class="kt-widget4__icon">
+                                                {% include "reseller/includes/profile/email.svg" %}
+                                            </span>
+                                            <a class="kt-widget4__title kt-widget4__title--light">
+                                               {{loc.mail}}
+                                            </a>
+                                            
+                                            <span class="kt-widget4__number kt-font-danger">{% include 'reseller/includes/profile/phone.svg' %}{{loc.mob}}</span>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <!--end:: Locaiton -->
+                                </div>
+                            </div>
+                            <!--end:: Widgets/Last Updates-->
+                        </div>
+                        <div  class="col-xl-6">
+                            <!--begin:: Widgets/Notifications-->
+                            <div class="kt-portlet kt-portlet--height-fluid">
+                                <div class="kt-portlet__head">
+                                    <div class="kt-portlet__head-label">
+                                        <h3 class="kt-portlet__head-title">
+                                           {% trans "Product" %}
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="kt-portlet__body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="kt_widget6_tab1_content" aria-expanded="true">
+                                            <div class="kt-notification">
+                                                <a href="#" class="kt-notification__item">
+                                                    <div class="kt-notification__item-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                                <path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
+                                                                <rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
+                                                            </g>
+                                                        </svg> </div>
+                                                    <div class="kt-notification__item-details">
+                                                        <div class="kt-notification__item-title">
+                                                            New order has been received.
+                                                        </div>
+                                                        <div class="kt-notification__item-time">
+                                                            2 hrs ago
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end:: Widgets/Notifications-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% comment "" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="row" id="gradient">
+                <div class="col-md-4">
+                    <img src="http://www.prepbootstrap.com/Content/images/shared/misc/s7e.png" class="img-fluid">
+                </div>
+                <div class="col-md-8" id="overview">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">
+                            <ul class="pb-product-details-ul">
+                                <li><span class="fa fa-calendar">&nbsp;Released 2016, March</span></li>
+                                <li><span class="fa fa-phone">&nbsp;157g, 7.7mm thickness</span></li>
+                                <li><span class="fa fa-bluetooth-b">&nbsp;Android OS, v6.0, up to 7.0</span></li>
+                                <li><span class="fa fa-microchip">&nbsp;32/64/128GB Storage</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-3 col-md-3 text-xs-center" id="hits">
+                            <span class="fa fa-bar-chart">&nbsp;24%</span>
+                            <p>22,010,155 HITS</p>
+                        </div>
+                        <div class="col-xs-3 col-md-3 text-xs-center" id="fan">
+                            <a href="#"><span class="fa fa-heart">&nbsp;1904</span></a>
+                            <p>BECOME A FAN</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 col-md-3 pb-product-details-fa">
+                            <span class="fa fa-mobile fa-lg"></span>
+                            <h3><strong>5.5"</strong></h3>
+                            <p>1440x2560 pixels</p>
+                        </div>
+                        <div class="col-xs-3 col-md-3 pb-product-details-fa">
+                            <span class="fa fa-camera fa-lg"></span>
+                            <h3><strong>12 MP</strong></h3>
+                            <p>2160p</p>
+                        </div>
+                        <div class="col-xs-3 col-md-3 pb-product-details-fa">
+                            <span class="fa fa-microchip fa-lg"></span>
+                            <h3><strong>4GB RAM</strong></h3>
+                            <p>Exynos 8890</p>
+                        </div>
+                        <div class="col-xs-3 col-md-3 pb-product-details-fa">
+                            <span class="fa fa-battery-4 fa-lg"></span>
+                            <h3><strong>3600mAH</strong></h3>
+                            <p>Li-ion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="tabs_div">
+                    <ul>
+                        <li>Display</li>
+                        <li>Camera</li>
+                        <li>Hardware</li>
+                        <li>Battery</li>
+                        <li>Phone features</li>
+                    </ul>
+                    <div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="success">Physical size: </td>
+                                    <td>5.5 inches</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Resolution: </td>
+                                    <td>1440x2560 pixels</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Pixel density: </td>
+                                    <td>534 dpi</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Technology: </td>
+                                    <td>Super AMOLED</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Screen-to-body-ratio: </td>
+                                    <td>76.09%</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Features: </td>
+                                    <td>Scratch-resistant glass (Corning Gorilla Glass 4), Light sensor, Proximity sensor</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="success">Camera: </td>
+                                    <td>12 megapixels</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Flash: </td>
+                                    <td>LED</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Aperture size: </td>
+                                    <td>F1.7</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Camera sensor size: </td>
+                                    <td>1/2.5"</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Pixel size: </td>
+                                    <td>1.4 um</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Hardware Features: </td>
+                                    <td>Optical image stabilization, Autofocus (Phase detection)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="success">System chip: </td>
+                                    <td>Qualcomm Snapdragon 820 MSM8996</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Processor: </td>
+                                    <td>Quad-core, 2200 MHz, Kryo, 64-bit</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">GPU: </td>
+                                    <td>Adreno 530</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">System memory: </td>
+                                    <td>4GB memory</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Built-in storage: </td>
+                                    <td>32GB</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Storage Expansion: </td>
+                                    <td>microSD, microSDHC, microSDXC up to 200 GB</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="success">Capacity: </td>
+                                    <td>3600mah</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Type: </td>
+                                    <td>Not user replaceable, Li - Ion</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Wireless charging: </td>
+                                    <td>Optional</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="success">Sensors: </td>
+                                    <td>Accelerometer, Gyroscope, Compass, Hall, Barometer</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Notifications: </td>
+                                    <td>Haptic feedback, Music ringtones (MP3), Polyphonic ringtones, Vibration, Flight mode, Silent mode, Speakerphone</td>
+                                </tr>
+                                <tr>
+                                    <td class="success">Other: </td>
+                                    <td>Voice dialing, Voice commands, Voice recording, TTY/TDD</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcomment %}
+{% endblock content %}
+{% block extrajs %}<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $(".tabs_div").shieldTabs();
+    });
+</script>{% endblock extrajs %}

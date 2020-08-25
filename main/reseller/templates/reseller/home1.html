@@ -1,0 +1,18 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "RESELLER" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+
+
+{% include "reseller/includes/content/content.html" %}
+<!-- end:: Page -->
+<!-- begin::Quick Panel -->
+{% include "reseller/includes/content/quickpanel.html" %}
+
+<!-- begin::Demo Panel -->
+{% include "reseller/includes/content/demopanel.html" %}
+<!-- end::Demo Panel -->
+
+{% endblock content %}
+{% block extrajs %}{% endblock extrajs %}

@@ -1,0 +1,70 @@
+{% extends "auth/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Login" %}{% endblock title %}
+
+{% block extracss %}
+{% endblock extracss %}
+{% block content %}
+<body style="background-image: url('{{STATIC_URL}}web/img/header-1.jpg'); background-position: center top; " 
+class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+	<div class="kt-grid kt-grid--ver kt-grid--root kt-page">
+		<div class="kt-grid kt-grid--hor kt-grid--root kt-login kt-login--v2 kt-login--signin" id="kt_login">
+	    	<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+		    	<div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+					<div class="kt-login__container">
+						<div class="kt-login__logo">
+							<a href="#">
+								<img  style="height: 100px!important;width: 150px!important;" src="{% static 'web/img/yemek-kalmasin.svg' %}">
+							</a>
+						</div>
+						<div class="kt-login__signin">
+							<div class="kt-login__head">
+								<h3 class="kt-login__title">{% trans "Yemek Kalmasın Login" %}</h3>
+							</div>
+							{% include "includes/message.html" %}
+							<form class="needs-validation kt-form" action="{% url 'users:login' %}" method="POST" novalidate>
+                            {% csrf_token %}
+								<div class="input-group">
+									<input class="form-control" type="text" placeholder="{% trans 'Username' %}" name="username" autocomplete="off" required>
+								</div>
+								<div class="input-group">
+									<input class="form-control" type="password" placeholder="{% trans 'Password' %}" name="password" required>
+								</div>
+								<div class="row kt-login__extra">
+									<div class="col">
+										<label class="kt-checkbox">
+											<input type="checkbox" name="remember">{% trans "Remember me" %}<span></span>
+										</label>
+									</div>
+									<div class="col kt-align-right">
+										<a href="{% url 'reset_password' %}" class="kt-link kt-login__link">{% trans "Forget Password ?" %}</a>
+									</div>
+								</div>
+                          		<div class="kt-login__actions">
+									<button type="submit" class="btn btn-pill kt-login__btn-primary">{% trans "Sign In" %}</button>
+								</div>
+							</form>
+						</div>
+                        <div class="kt-login__account">
+                            <span class="kt-login__account-msg">
+                                {% trans "Don't have an account yet ?" %}</span>&nbsp;&nbsp;
+                            <a href="{% url 'users:signup_view' %}" class="kt-link kt-link--light kt-login__account-link">{% trans "Sign Up" %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+{% block extrajs %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+{% comment "" %}
+function send_email(){
+    $.get("{% url 'resend_email_verification' %}", { username: '{{username}}' });
+}
+{% endcomment %}
+{% endblock extrajs %}
+
+

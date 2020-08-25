@@ -1,0 +1,43 @@
+{% extends "auth/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Reset Password" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+<body style="background-image: url('{{STATIC_URL}}web/img/header-1.jpg'); background-position: center top;" 
+class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+	<div class="kt-grid kt-grid--ver kt-grid--root kt-page">
+		<div class="kt-grid kt-grid--hor kt-grid--root kt-login kt-login--v2 kt-login--signin" id="kt_login">
+	    	<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+		    	<div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+					<div class="kt-login__container">
+						<div class="kt-login__logo">
+							<a href="#">
+								<img  style="height:80px!important;width: 130px!important;"src="{% static 'web/img/yemek-kalmasin.svg' %}">
+							</a>
+						</div>
+                        <div class="kt-login__head">
+                            <h3 class="kt-login__title">
+                                {% trans "Forgotten Password ?" %}
+                            </h3>
+                            {% include "includes/message.html" %}
+                            <div class="kt-login__desc">
+                                {% trans "Enter your email to reset your password:" %}
+                            </div>
+                        </div>
+                        <form class="kt-form needs-validation" action="{% url 'users:rest_password_page' %}" method="POST">
+                        {% csrf_token %}
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Email or username" name="username" id="kt_email" autocomplete="off">
+                            </div>
+                            <div class="kt-login__actions">
+                                <button type="submit"  class="btn btn-pill kt-login__btn-primary">{% trans "Request" %}</button>&nbsp;&nbsp;
+                                <a href="/" class="btn btn-pill kt-login__btn-secondary">{% trans "Cancel" %}</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block extrajs %}{% endblock extrajs %}

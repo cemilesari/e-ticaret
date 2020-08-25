@@ -1,0 +1,17 @@
+{% extends 'admin/change_form.html' %}
+{% load static %}
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<style type="text/css">
+.cke_chrome { margin-left: 170px; }
+</style>
+<script src="/static/assets/vendor/ckeditor/ckeditor-init.js"></script>
+<script src="/static/assets/vendor/ckeditor/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+(function($) {
+    $("#preference_form, #procurement_form").find('textarea').each(function() {
+        $(this).addClass("ckeditor");
+    });
+})(django.jQuery);
+</script>
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Profile" %}{% endblock title %}
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{% static 'web/css/wizard.css' %}" />
+{% endblock extracss %}
+{% block content %}	
+{% comment "" %}
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+	<div class="kt-content kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+	        <div class="kt-container ">
+	            <div class="kt-subheader__main">
+		            <h3 class="kt-subheader__title">
+			            {% trans "Addresse Detail" %}
+                    </h3>
+       	            <div class="kt-subheader__breadcrumbs">
+	                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+	                	    <span class="kt-subheader__breadcrumbs-separator"></span>
+	                    <a href="" class="kt-subheader__breadcrumbs-link">{% trans "Addresses" %}</a>
+	                	    <span class="kt-subheader__breadcrumbs-separator"></span>
+	                </div>
+	            </div>
+	            <div class="kt-subheader__toolbar">
+	                <div class="kt-subheader__wrapper">
+	                    <a href="#" class="btn kt-subheader__btn-secondary">Reports</a>
+	                <div class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="Quick actions" data-placement="top">
+	                    <a href="#" class="btn btn-danger kt-subheader__btn-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
+	                <div class="dropdown-menu dropdown-menu-right">
+	                    <a class="dropdown-item" href="#"><i class="la la-plus"></i> New Product</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>
+{% endcomment %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--mobile">
+	    <div class="kt-portlet__head kt-portlet__head--lg">
+		    <div class="kt-portlet__head-label">
+			    <span class="kt-portlet__head-icon">
+				    <i class="kt-font-brand flaticon2-line-chart"></i>
+			    </span>
+			    <h3 class="kt-portlet__head-title">
+				    {% trans "Addresse View" %}
+				    <small>{% trans "Addresse Detail" %}</small>
+			    </h3>
+		    </div>
+		<div class="kt-portlet__head-toolbar">
+			<div class="">
+				<a href="{% url 'reseller:addresse_create' %}" type="button" class="btn btn-brand btn-icon-sm" >
+					<i class="flaticon2-plus"></i> {% trans "Add New" %}
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="kt-portlet kt-portlet--height-fluid">
+		<div class="kt-portlet__head kt-portlet__head--noborder">
+			<div class="kt-portlet__head-label">
+				<h3 class="kt-portlet__head-title">
+				</h3>
+			</div>
+			<div class="kt-portlet__head-toolbarr" style="margin-top:10px;">
+				<a href="javascript:void(0)" 
+				class="btn btn-sm btn-outline-secondary" 
+				style="margin-left: 540px!important; padding:0.1rem 0.4rem;" 
+				id="delete-{{ address.id }}" 
+				onclick="delete_address({{ address.id }});">
+				<i class="fas fa-times" style="color:#b51c1c;padding:0px!important; "></i></a>
+			</div>
+			</div>
+			<div class="kt-portlet__body">
+				<div class="kt-widget kt-widget--user-profile-2">
+					<div class="kt-widget__head">
+						<div class="kt-widget__media">
+							<img class="kt-widget__img kt-hidden-" src={% static 'reseller/img/address.png' %} alt="image" style="width:50px!important;">
+						</div>
+						<div class="kt-widget__info">
+							<a href="#" class="kt-widget__username">
+								{{address.user.username|upper}}
+							</a>
+							<span class="kt-widget__desc">
+								{{address.created|date:'Y-m-d '}}
+							</span>
+						</div>
+					</div>
+					<div class="kt-widget__body">
+						<div class="kt-widget__item">
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "ADDRESS" %}</span>
+								<a href="#" class="kt-widget__data">{{address.address|upper}}</a>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "CITY" %}</span>
+								<span class="kt-widget__data"> {{address.city|upper}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "STATE" %}</span>
+								<span class="kt-widget__data">{{address.state|upper}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "ZIPCODE" %}</span>
+								<span class="kt-widget__data">{{address.zipcode}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "LATITUDE" %}</span>
+								<span class="kt-widget__data">{{address.lati}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "LONGITUDE" %}</span>
+								<span class="kt-widget__data">{{address.lngt}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "MOBILE" %}</span>
+								<a href="#" class="kt-widget__data">{{address.mob}}</a>
+							</div>
+						
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "TELEPHONE" %}</span>
+								<span class="kt-widget__data">{{address.tel}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "FAX" %}</span>
+								<span class="kt-widget__data">{{address.fax}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "WEBSITE" %}</span>
+								<span class="kt-widget__data">{{address.url}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "MAIL" %}</span>
+								<span class="kt-widget__data">{{address.mail}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "TAX ID" %}</span>
+								<span class="kt-widget__data">{{address.tax_id}}</span>
+							</div>
+							<div class="kt-widget__contact">
+								<span class="kt-widget__label">{% trans "TAX BRANCH" %}</span>
+								<span class="kt-widget__data">{{address.tax_branch}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+ 
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript" src="{% static 'web/js/wizard.js' %}"></script>
+<script type="text/javascript">
+(function($){
+	window.delete_address = function (id){
+		$(document).on("click","#delete-"+id , function (e) {
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You won't be able to login from this device till you approve it again",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+				var url = "{% url 'reseller:addresse_delete' %}";
+				if (result.value) {
+					$.post( url, { csrfmiddlewaretoken: '{{ csrf_token }}', id: id }, function( data ) {
+						if (data.status){
+							Swal.fire(
+								'Deleted!',
+								'The Device has been deleted.',
+								'success'
+							)
+							$('#address-'+id).remove();
+						}
+						else{
+							Swal.fire(
+								'Error!',
+								'Error while deleting your device',
+								'Error'
+							)
+						}
+					});					
+				}
+			})
+		});
+	};
+})(jQuery);
+
+</script>
+{% endblock extrajs %}
+
+
+      

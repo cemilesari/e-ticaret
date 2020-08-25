@@ -1,0 +1,70 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %} 
+{% block title %} {% trans "New Ticket" %} {% endblock title %} 
+{% block extracss %} 
+<link rel="stylesheet" href="{% static 'portal/dashboard.css' %}">
+<script src="{% static 'assets/js/lightweight.js' %}"></script>
+{% endblock extracss %} 
+
+{% block content %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--mobile">
+	    <div class="kt-portlet__head kt-portlet__head--lg">
+		    <div class="kt-portlet__head-label">
+			    <span class="kt-portlet__head-icon">
+				    <i class="kt-font-brand flaticon2-line-chart"></i>
+			    </span>
+			    <h3 class="kt-portlet__head-title">
+				    {% trans " New Ticket" %}
+			    </h3>
+		    </div>
+		<div class="kt-portlet__head-toolbar">
+            <div class="kt-portlet__head-wrapper">
+	            <div class="">
+		            <a href="{% url 'tickets:new_ticket' %}" type="button" class="btn btn-brand btn-icon-sm" >
+			        <i class="flaticon2-plus"></i> {% trans "Add New" %}
+	    	        </a>
+	            </div>
+            </div>		
+        </div>
+    </div>
+    <form action="{% url 'tickets:new_ticket' %}" method="POST">
+        {% csrf_token %}
+        <div class="card-body " style="padding:70px;">
+            <div class="form-row">
+
+                <div class="col-12 form-group">
+                        <label>{% trans "Ticket Subject" %}</label>
+                        <input name="ticket_subject" class="form-control" type="text" placeholder="{% trans 'Ticket Subject' %}">
+                </div>
+                <label>{% trans "Ticket Description" %}</label>
+
+                <div class="col-12 form-group">
+                    <textarea name="ticket_desc" class="form-control form-control-lg" type="text" placeholder="Description"></textarea>
+
+
+                </div>
+                <div class="col-6 form-group">
+                        <label>{% trans "Ticket Type" %}</label>
+                        <select name="ticket_types" class="form-control custom-select">
+                                <option value="">{% trans "Types" %}</option>
+                                {% for ticket_types in types %}
+                                    <option value="{{ ticket_types.0 }}" {% if ticket_types.0 == request.GET.ticket_types %}selected{% endif %}>{{ ticket_types.1 }}</option>
+                                {% endfor %}
+                            </select>
+                </div>
+                <div class="col-6 form-group">
+                        <label>{% trans "Ticket Priority" %}</label>
+
+                    <select name="ticket_priority" class="form-control custom-select">
+                            <option value="">{% trans "Priority" %}</option>
+                            {% for ticket_priority in priorities %}
+                                <option value="{{ ticket_priority.0 }}" {% if ticket_priority.0 == request.GET.ticket_priority %}selected{% endif %}>{{ ticket_priority.1 }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+            </div>
+            <button style="line-height: 0.5!important;" type="submit" class="btn btn-primary btn-lg">{% trans "Save" %}</button>
+    </form>
+</div>
+    {% endblock content %} {% block extrajs %} {% endblock extrajs %}

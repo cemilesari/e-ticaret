@@ -1,0 +1,417 @@
+{% load static i18n %}
+  <div class="about">
+    <a class="bg_links social portfolio" href="https://yemekkalmasin.com" target="_blank"><span class="icon"></span></a>
+    <a class="bg_links social dribbble"  href="https://yemekkalmasin.com" target="_blank"><span class="icon"></span></a>
+    <a class="bg_links social linkedin"  href="https://yemekkalmasin.com" target="_blank"><span class="icon"></span></a>
+    <a class="bg_links logo"></a>
+</div>
+<!-- begin:: Content -->
+<div class="row"> 
+    <div class="col-md-7" style="margin-left: -158px;">
+        {% include 'web/includes/bg.svg' %}
+    </div>
+    <div class="col-md-5" style="margin-left: 115px;max-width: 700px;">
+        {% if user.is_authenticated %}
+           {% include "web/includes/londra.html" %}
+        {% else %}
+        <div class="kt-portlet" style="width:500px;margin-left:80px;margin-top:80px;background-color:transparent!important;color:#ddd!important;">
+            <div class="kt-portlet__body">
+                <div class="kt-infobox">
+                    <div class="kt-infobox__header" >
+                        <h2 class="kt-infobox__title"style="font-size: 2.5rem;color:#fff!important;">
+                            <a onMouseOver="this.style.color='#00F'"
+                            onMouseOut="this.style.color='#fff'" 
+                            style="font-size:2.5rem;color:#fff!important;" 
+                            href="{% url 'users:signup_view' %}">
+                                {% trans "Become A Partner ! " %}
+                            </a>
+                        </h2>
+              
+                    </div>
+                    <div class="kt-infobox__body">
+                        <div class="kt-infobox__section">
+                            <div class="kt-infobox__content" style="color:#ddd!important;">
+                                {% trans "Food waste is a trillion dollar economic problem with serious environmental consequences. Every year; 20% of dairy products, 35% of fish and seafood, 45% of fresh products, 20% of meat products are wasted. Let food stay alive by linking citizens and merchants directly, bringing unsold dishes to life. Fighting food waste.<br>"%}
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    <!-- end:: Content -->
+    </div>
+</div>
+{% comment "" %}
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+    <div class="kt-content kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+{% endcomment %}
+      {% comment "" %}
+       <div class="row" >
+            <div class="col-md-7">
+                {% include 'web/includes/bg.svg' %}
+            </div>
+            <div class="col-md-5">
+                {% if user.is_authenticated %}
+                <div class="best_sellers" >
+                    <div class="kt-portlet__head" >
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title" style="color:#ffffff;">{% trans "Best Sellers" %}</h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold" role="tablist">
+                                <li class="nav-item">
+                                    <a style="color:#711212;" class="nav-link active" data-toggle="tab" href="#kt_widget5_tab1_content" role="tab">
+                                        {% trans "Latest" %}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a style="color:#711212;" class="nav-link" data-toggle="tab" href="#kt_widget5_tab2_content" role="tab">
+                                        {% trans "Month" %}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a style="color:#711212;" class="nav-link" data-toggle="tab" href="#kt_widget5_tab3_content" role="tab">
+                                        {% trans "All time" %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="kt_widget5_tab1_content" aria-expanded="true">
+                                <div class="kt-widget5">
+                                    <div class="kt-widget5__item">
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__pic">
+                                                <img class="kt-widget7__img" src="{% static 'web/img/product5.jpg' %}" alt="">
+                                            </div>
+                                            <div class="kt-widget5__section">
+                                                <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                                    Great Logo Designn
+                                                </a>
+                                                <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                                    Metronic admin themes.
+                                                </p>
+                                                <div class="kt-widget5__info">
+                                                    <span style ="color:#711212;">Author:</span>
+                                                    <span style ="color:#0f1a40">Keenthemes</span>
+                                                    <span style ="color:#711212;">Released:</span>
+                                                    <span style ="color:#0f1a40">23.08.17</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff"  class="kt-widget5__number">19,200</span>
+                                                <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                                            </div>
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;"  class="kt-widget5__number">1046</span>
+                                                <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget5__item">
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__pic">
+                                                <img class="kt-widget7__img" src="{% static 'web/img/product7.jpg' %}" alt="">
+                                            </div>
+                                            <div class="kt-widget5__section">
+                                                <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                                    Branding Mockup
+                                                </a>
+                                                <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                                    Metronic bootstrap themes.
+                                                </p>
+                                                <div class="kt-widget5__info">
+                                                    <span style ="color:#711212;">Author:</span>
+                                                    <span style ="color:#0f1a40">Fly themes</span>
+                                                    <span style ="color:#711212;">Released:</span>
+                                                    <span style ="color:#0f1a40">23.08.17</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;class="kt-widget5__number">24,583</span>
+                                                <span style="color:#ffffff;class="kt-widget5__sales">sales</span>
+                                            </div>
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;class="kt-widget5__number">3809</span>
+                                                <span style="color:#ffffff;class="kt-widget5__votes">votes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget5__item">
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__pic">
+                                                <img class="kt-widget7__img" src="{% static 'web/img/product18.jpg' %}" alt="">
+                                            </div>
+                                            <div class="kt-widget5__section">
+                                                <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                                    Awesome Mobile App
+                                                </a>
+                                                <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                                    Metronic admin themes.Lorem Ipsum Amet
+                                                </p>
+                                                <div class="kt-widget5__info">
+                                                    <span style ="color:#711212;">Author:</span>
+                                                    <span style ="color:#0f1a40">Fly themes</span>
+                                                    <span style ="color:#711212;">Released:</span>
+                                                    <span style ="color:#0f1a40">23.08.17</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;" class="kt-widget5__number">210,054</span>
+                                                <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                                            </div>
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;" class="kt-widget5__number">1103</span>
+                                                <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="kt_widget5_tab2_content">
+                                <div class="kt-widget5">
+                                    <div class="kt-widget5__item">
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__pic">
+                                                <img class="kt-widget7__img" src="{% static 'web/img/product20.jpg' %}"  alt="">
+                                            </div>
+                                            <div class="kt-widget5__section">
+                                                <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                                    Branding Mockup
+                                                </a>
+                                                <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                                    Metronic bootstrap themes.
+                                                </p>
+                                                <div class="kt-widget5__info">
+                                                    <span style ="color:#711212;">Author:</span>
+                                                    <span style ="color:#0f1a40">Fly themes</span>
+                                                    <span style ="color:#711212;">Released:</span>
+                                                    <span style ="color:#0f1a40">23.08.17</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;" class="kt-widget5__number">24,583</span>
+                                                <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                                            </div>
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;" class="kt-widget5__number">3809</span>
+                                                <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget5__item">
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__pic">
+                                                <img class="kt-widget7__img" src="{% static 'web/img/product13.jpg' %}"  alt="">
+                                            </div>
+                                            <div class="kt-widget5__section">
+                                                <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                                    Awesome Mobile App
+                                                </a>
+                                                <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                                    Metronic admin themes.Lorem Ipsum Amet
+                                                </p>
+                                                <div class="kt-widget5__info">
+                                                    <span style ="color:#711212;">Author:</span>
+                                                    <span style ="color:#0f1a40">Fly themes</span>
+                                                    <span style ="color:#711212;">Released:</span>
+                                                    <span style ="color:#0f1a40">23.08.17</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;"  class="kt-widget5__number">210,054</span>
+                                                <span  style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                                            </div>
+                                            <div class="kt-widget5__stats">
+                                                <span  style="color:#ffffff;" class="kt-widget5__number">1103</span>
+                                                <span style="color:#ffffff;"  class="kt-widget5__votes">votes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget5__item">
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__pic">
+                                                <img class="kt-widget7__img" src="{% static 'web/img/product17.jpg' %}"  alt="">
+                                            </div>
+                                            <div class="kt-widget5__section">
+                                                <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                                    Great Logo Designn
+                                                </a>
+                                                <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                                    Metronic admin themes.
+                                                </p>
+                                                <div class="kt-widget5__info">
+                                                    <span style ="color:#711212;">Author:</span>
+                                                    <span style ="color:#0f1a40">Keenthemes</span>
+                                                    <span style ="color:#711212;">Released:</span>
+                                                    <span style ="color:#0f1a40">23.08.17</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-widget5__content">
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;" class="kt-widget5__number">19,200</span>
+                                                <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                                            </div>
+                                            <div class="kt-widget5__stats">
+                                                <span style="color:#ffffff;" class="kt-widget5__number">1046</span>
+                                                <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="kt_widget5_tab3_content">
+                                <div class="kt-widget5">
+                                        <div class="kt-widget5__item">
+                                            <div class="kt-widget5__content">
+                                                <div class="kt-widget5__pic">
+                                                    <img class="kt-widget7__img" src="{% static 'web/img/product5.jpg' %}"  alt="">
+                                                </div>
+                                                <div class="kt-widget5__section">
+                                                    <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                                        Awesome Mobile App
+                                                    </a>
+                                                    <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                                        Metronic admin themes.Lorem Ipsum Amet
+                                                    </p>
+                                                    <div class="kt-widget5__info">
+                                                        <span style ="color:#711212;">Author:</span>
+                                                        <span style ="color:#0f1a40">Fly themes</span>
+                                                        <span style ="color:#711212;">Released:</span>
+                                                        <span style ="color:#0f1a40">23.08.17</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="kt-widget5__content">
+                                                <div class="kt-widget5__stats">
+                                                    <span style="color:#ffffff;" class="kt-widget5__number">210,054</span>
+                                                    <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                                                </div>
+                                                <div class="kt-widget5__stats">
+                                                    <span style="color:#ffffff;" class="kt-widget5__number">1103</span>
+                                                    <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-widget5__item">
+                                            <div class="kt-widget5__content">
+                                                <div class="kt-widget5__pic">
+                                                    <img class="kt-widget7__img" src="{% static 'web/img/product3.jpg' %}"  alt="">
+                                                </div>
+                                                <div class="kt-widget5__section">
+                                                    <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                                        Great Logo Designn
+                                                    </a>
+                                                    <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                                        Metronic admin themes.
+                                                    </p>
+                                                    <div class="kt-widget5__info">
+                                                        <span style ="color:#711212;">Author:</span>
+                                                        <span style ="color:#0f1a40">Keenthemes</span>
+                                                        <span style ="color:#711212;">Released:</span>
+                                                        <span style ="color:#0f1a40">23.08.17</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="kt-widget5__content">
+                                                <div class="kt-widget5__stats">
+                                                    <span style="color:#ffffff;" class="kt-widget5__number">19,200</span>
+                                                    <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                                                </div>
+                                                <div class="kt-widget5__stats">
+                                                    <span style="color:#ffffff;" class="kt-widget5__number">1046</span>
+                                                    <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-widget5__item">
+                                            <div class="kt-widget5__content">
+                                                <div class="kt-widget5__pic">
+                                                    <img class="kt-widget7__img" src="{% static 'web/img/product28.jpg' %}"  alt="">
+                                                </div>
+                                                <div class="kt-widget5__section">
+                                                    <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                                        Branding Mockup
+                                                    </a>
+                                                    <p class="kt-widget5__desc" style="color: darkturquoise!important;">
+                                                        Metronic bootstrap themes.
+                                                    </p>
+                                                    <div class="kt-widget5__info">
+                                                        <span style ="color:#711212;">Author:</span>
+                                                        <span style ="color:#0f1a40">Fly themes</span>
+                                                        <span style ="color:#711212;">Released:</span>
+                                                        <span style ="color:#0f1a40">23.08.17</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="kt-widget5__content">
+                                                <div class="kt-widget5__stats">
+                                                    <span style="color:#ffffff;" class="kt-widget5__number">24,583</span>
+                                                    <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                                                </div>
+                                                <div class="kt-widget5__stats">
+                                                    <span style="color:#ffffff;" class="kt-widget5__number">3809</span>
+                                                    <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="kt-portlet" style="width:500px;margin-bottom: 20px;margin-right: 150px;margin-top: 150px;background-color:lavender;">
+                    <div class="kt-portlet__body">
+                        <div class="kt-infobox">
+                            <div class="kt-infobox__header">
+                                <h2 class="kt-infobox__title">{% trans "RESELLER " %}</h2>
+                            <div class="kt-infobox__badge">{% trans "example" %}</div>
+                            </div>
+                            <div class="kt-infobox__body">
+                                <div class="kt-infobox__section">
+                                    <div class="kt-infobox__content">
+                                        {% trans "This means you receive the latest fixes and security updates,helping your device run efficiently and stay protected. In most cases,restarting your device completes the update. Make sure your device is plugged in when you know updates will be installed. <br>"%}
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>  
+        </div>
+      {% endcomment %}
+      {% comment "" %}
+    <div class= "row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    </div>
+</div>
+  
+      {% endcomment %}
+    
+
+	

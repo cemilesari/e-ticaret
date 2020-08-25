@@ -1,0 +1,21 @@
+sudo: no
+addons:
+  apt:
+    sources:
+      - ppa:chris-lea/redis-server
+    packages:
+      - redis-server
+      - virtualenv
+dist: xenial
+cache:
+  - apt
+  - pip
+language: python
+
+python:
+  - "3.5"
+install:
+  - pip install -r requirements.txt
+script:
+  - cp -rf Sample.env .env
+  - python manage.py reseter && python manage.py makemigrations && python manage.py migrate && python manage.py load_new

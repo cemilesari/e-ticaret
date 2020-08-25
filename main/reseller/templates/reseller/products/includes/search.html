@@ -1,0 +1,48 @@
+{% load static i18n %}
+<form action="" method="GET" style="font-size:80%;" autocomplete="off">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label>{% trans "Search" %}</label>
+            <div class="kt-input-icon kt-input-icon--left">
+                <input type="text" class="form-control" name="search" value="{{ request.GET.search }}">
+                <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                    <span><i class="la la-search"></i></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label>{% trans "Template" %}</label>
+            <select name="template" class="form-control custom-select">
+                <option value="">{% trans "All Templates" %}</option>
+                {% for temp in template %}
+                    <option value="{{ temp.name }}" >{{ temp.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label>{% trans "Branch" %}</label>
+            <select name="branch" class="form-control custom-select">
+                <option value="">{% trans "All Branches" %}</option>
+                {% for bran in branch %}
+                    <option value="{{ bran.name }}" {% if bran.name == request.GET.bran%}selected{% endif %}>{{ bran.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label>{% trans "Status" %}</label>
+            <select name="status" class="form-control custom-select">
+                <option value="">{% trans "All Status" %}</option>
+                {% for stat in status %}
+                    <option value="{{ stat.0 }}" {% if stat.0 == request.GET.status %}selected{% endif %}>{{ stat.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+       
+        <div class="form-group col-md-1">
+            <button 
+            class="btn btn-brand btn-icon-sm"
+            style="margin-top: 26px;width:95px;height: 38.39px;">
+            <i class="fas fa-search"></i> {% trans "Search" %}</button>
+        </div>
+    </div>
+</form>

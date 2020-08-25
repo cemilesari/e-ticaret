@@ -1,0 +1,81 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Profile" %}{% endblock title %}
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{% static 'web/css/wizard.css' %}" />
+{% endblock extracss %}
+{% block content %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="kt-portlet">
+		<div class="kt-portlet__body kt-portlet__body--fit">
+	        {% include "reseller/includes/profile/base.html" %}
+				<div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
+					<form class="needs-validation kt-form" action="{% url 'reseller:create_branch' %}" enctype="multipart/form-data" method="post" novalidate>
+                        {% csrf_token %}
+						{% include 'includes/message.html' %}
+						<div class="kt-wizard-v1__content">
+							<div class="kt-heading kt-heading--md">
+                                {% trans "New Branch " %}
+                            </div>
+							<div class="kt-form__section kt-form__section--first">
+								<div class="kt-wizard-v1__form">
+                                       <div class="form-group m-form__group row">
+                                  	        <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <label>{% trans "Branch Name" %}</label>
+                                                        <input type="text" class="form-control" name="name" placeholder="Branch Name" required>
+                                                    <span class="form-text text-muted">{% trans "Please enter your Branch Name" %}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <label>{% trans "Description" %}</label>
+                                                    <input type="text" class="form-control" name="body" placeholder="Branch Description" required>
+                                                    <span class="form-text text-muted">{% trans "Please enter your branch information" %}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label>{% trans "Company" %}</label>
+                                                        <select id="inputState" name="company" class="form-control" required>
+                                                        {% for company in companies %}
+                                                            <option value="{{ company.id }}">
+                                                        {{ company.name }}
+                                                        </option>
+                                                        {% endfor %}
+                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label >{% trans "Location" %}</label>
+                                                    <select id="inputState" name="location" class="form-control" required>
+                                                        {% for location in locations %}
+                                                            <option value="{{ location.id }}">
+                                                            {{ location.address | upper }}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" >
+                                    {% trans "Submit" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript" src="{% static 'web/js/wizard.js' %}"></script>
+{% endblock extrajs %}

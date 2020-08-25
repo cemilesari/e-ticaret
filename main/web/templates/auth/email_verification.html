@@ -1,0 +1,19 @@
+{% extends 'auth/base.html' %}
+{% load static i18n %}
+{% block title %}{% trans "KrakenKube" %} | {% trans "Email Verification" %}{% endblock title %}
+{% block content %}
+<div class="padding-box-2">
+    <div class="text-center p-b-20 pull-up-sm">
+        <div class="avatar avatar-lg">
+            <span class="avatar-title rounded-circle bg-pink"><i class="mdi mdi-email-open"></i></span>
+        </div>
+    </div> 
+    <h3 class="text-center">{% if msg %}{{ msg }}{% else %}{% trans "Error with Email Verification" %}{% endif %}</h3>
+    <br>
+    <form action="{% url 'users:login_page' %}" method="get">
+        <div class="form-group">
+            <button class="btn text-uppercase btn-block btn-primary">{% trans "Login" %}</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

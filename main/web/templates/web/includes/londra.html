@@ -1,0 +1,150 @@
+{% load i18n static  %}
+
+<div class="best_sellers"  >
+    <div class="kt-portlet__head" >
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title" style="color:#ffffff;">{% trans "Best Sellers" %}</h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+            <ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold" role="tablist">
+                <li class="nav-item">
+                    <a style="color: #ffb822;;" class="nav-link active" data-toggle="tab" href="#kt_widget5_tab1_content" role="tab">
+                    {% trans "Latest" %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a style="color: #ffb822;;" class="nav-link" data-toggle="tab" href="#kt_widget5_tab2_content" role="tab">
+                    {% trans "Month" %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a style="color: #ffb822;;" class="nav-link" data-toggle="tab" href="#kt_widget5_tab3_content" role="tab">
+                    {% trans "All time" %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <div class="tab-content">
+            <div class="tab-pane active" id="kt_widget5_tab1_content" aria-expanded="true">
+                <div class="kt-widget5">
+                {% for company in companies_day%}
+                    <div class="kt-widget5__item">
+                        <div class="kt-widget5__content">
+                            <div class="kt-widget5__pic">
+                            {% if company.logo%}
+                                <img class="kt-widget7__img" src={{company.logo.url}} alt="">
+                            {% endif %}
+                            </div>
+                            <div class="kt-widget5__section">
+                                <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                   {{company.name}}
+                                </a>
+                                <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                   {{company.user}}
+                                </p>
+                                <div class="kt-widget5__info">
+                                    <span style ="color:#711212;">Author:</span>
+                                    <span style ="color:#0f1a40">Keenthemes</span>
+                                    <span style ="color:#711212;">Released:</span>
+                                    <span style ="color:#0f1a40">23.08.17</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-widget5__content">
+                            <div class="kt-widget5__stats">
+                                <span style="color:#ffffff"  class="kt-widget5__number">19,200</span>
+                                <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                            </div>
+                            <div class="kt-widget5__stats">
+                                <span style="color:#ffffff;"  class="kt-widget5__number">1046</span>
+                                <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane" id="kt_widget5_tab2_content">
+                <div class="kt-widget5">
+                     {% for company in companies_week %}
+                    <div class="kt-widget5__item">
+                        <div class="kt-widget5__content">
+                            <div class="kt-widget5__pic">
+                            {% if company.logo%}
+                                <img class="kt-widget7__img" src={{company.logo.url}} alt="">
+                            {% endif %}
+                            </div>
+                            <div class="kt-widget5__section">
+                                <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                   {{company.name}}
+                                </a>
+                                <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                   {{company.user}}
+                                </p>
+                                <div class="kt-widget5__info">
+                                    <span style ="color:#711212;">Author:</span>
+                                    <span style ="color:#0f1a40">Keenthemes</span>
+                                    <span style ="color:#711212;">Released:</span>
+                                    <span style ="color:#0f1a40">23.08.17</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-widget5__content">
+                            <div class="kt-widget5__stats">
+                                <span style="color:#ffffff"  class="kt-widget5__number">19,200</span>
+                                <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                            </div>
+                            <div class="kt-widget5__stats">
+                                <span style="color:#ffffff;"  class="kt-widget5__number">1046</span>
+                                <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane" id="kt_widget5_tab3_content">
+                <div class="kt-widget5">
+                        {% for company in companies_year %}
+                    <div class="kt-widget5__item">
+                        <div class="kt-widget5__content">
+                            <div class="kt-widget5__pic">
+                            {% if company.logo%}
+                                <img class="kt-widget7__img" src={{company.logo.url}} alt="">
+                            {% endif %}
+                            </div>
+                            <div class="kt-widget5__section">
+                                <a href="#" class="kt-widget5__title" style="color:honeydew;">
+                                   {{company.name}}
+                                </a>
+                                <p class="kt-widget5__desc" style="color: darkturquoise;">
+                                   {{company.user}}
+                                </p>
+                                <div class="kt-widget5__info">
+                                    <span style ="color:#711212;">Author:</span>
+                                    <span style ="color:#0f1a40">Keenthemes</span>
+                                    <span style ="color:#711212;">Released:</span>
+                                    <span style ="color:#0f1a40">23.08.17</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-widget5__content">
+                            <div class="kt-widget5__stats">
+                                <span style="color:#ffffff"  class="kt-widget5__number">19,200</span>
+                                <span style="color:#ffffff;" class="kt-widget5__sales">sales</span>
+                            </div>
+                            <div class="kt-widget5__stats">
+                                <span style="color:#ffffff;"  class="kt-widget5__number">1046</span>
+                                <span style="color:#ffffff;" class="kt-widget5__votes">votes</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>          

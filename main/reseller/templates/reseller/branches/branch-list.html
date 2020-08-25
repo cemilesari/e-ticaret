@@ -1,0 +1,185 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Branch List" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+{% load i18n %}
+
+{% comment "" %}
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+	<div class="kt-content kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+            <div class="kt-container ">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        {% trans "Branch List" %} 
+                    </h3>
+                    <div class="kt-subheader__breadcrumbs">
+                        <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                        <span class="kt-subheader__breadcrumbs-separator"></span>
+                        <a href="" class="kt-subheader__breadcrumbs-link">{% trans "Branches" %} </a>
+                    </div>
+                </div>
+
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <a href="#" class="btn kt-subheader__btn-secondary">{% trans "Reports" %}</a>
+                    <div class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="Quick actions" data-placement="top">
+                        <a href="#" class="btn btn-danger kt-subheader__btn-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% trans "Products" %}</a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{% url 'reseller:create_branch'%}"><i class="la la-plus"></i> {% trans "New Product" %}</a>
+                        <div class="dropdown-divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcomment %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="alert alert-light alert-elevate" role="alert">
+			<div class="kt-portlet kt-portlet--mobile">
+				<div class="kt-portlet__head kt-portlet__head--lg">
+					<div class="kt-portlet__head-label">
+						<span class="kt-portlet__head-icon">
+						    <i class="kt-font-brand flaticon2-line-chart"></i>
+						</span>
+						<h3 class="kt-portlet__head-title">
+                         {% trans "YEMEK KALMASIN YOUR BRANCHES" %}
+                        </h3>
+					</div>
+				    <div class="kt-portlet__head-toolbar">
+					    <a  type="button" href="{% url 'reseller:create_branch' %}" class="btn btn-brand btn-icon-sm" >
+					        <i class="flaticon2-plus"></i> {% trans "Add New Branch" %}
+					    </a>
+					</div>	
+			    </div>
+                <div class="kt-portlet__body">
+                		{% include 'includes/message.html' %}
+
+                    {% for branch in branches %}
+                     <div class="kt-portlet__body">
+                    <div class="kt-widget kt-widget--user-profile-3">
+                        <div class="kt-widget__top">
+                            <div class="kt-widget__media kt-hidden-">
+                                {% if branch.company.logo %}
+                                <img src="{{branch.company.logo.url}}" alt="image" style="width: 200px;border-radius: 3px;height: 130px;"> {% endif %}
+                            </div>
+                            <div class="kt-widget__content">
+                                <div class="kt-widget__head">
+                                    <a href="#" class="kt-widget__title">
+                                           {{branch.company.name|upper}} - {{branch.name|upper}}  <i class="flaticon2-correct"></i>
+                                        </a>
+                                    <div class="kt-widget__action">
+                                        <a type="button" href="{% url 'reseller:detail_branch' branch.pk %}" class="btn btn-success btn-sm btn-upper" style="background-color:#268271">
+                                            {% trans "DETAIL" %}
+                                        </a>&nbsp;
+                                        <a type="button" href="{% url 'reseller:update_branch' branch.pk %}" class="btn btn-success btn-sm btn-upper" style="background-color:#268271">
+                                            {% trans "UPDATE" %}
+                                        </a>&nbsp;
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-upper" id="delete-{{ branch.id }}" onclick="delete_branch({{branch.id }});">
+                                            <i class="fas fa-times" style="padding:0px!important; "></i></a>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="kt-widget__info">
+                                    <div class="kt-widget__desc">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="kt-widget__item">
+                                                    <span class="kt-widget__date">
+								                        {% trans " User" %}
+							                        </span>
+                                                    <div class="kt-widget__label">
+                                                        <span class="btn btn-label-brand btn-sm btn-bold btn-upper">
+															{{branch.user }}
+														</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="kt-widget__item">
+                                                    <span class="kt-widget__date">
+														{% trans " Location " %}
+													</span>
+                                                    <div class="kt-widget__label">
+                                                        <span class="btn btn-label-danger btn-sm btn-bold btn-upper">
+															{{branch.location | upper }}
+														</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="kt-widget__item">
+                                                    <span class="kt-widget__subtitel" style="font-size: initial;">
+														{% trans "Branch Description" %}
+													</span>
+                                                    <div class="col-md-12">
+														<span>	{{branch.body|truncatechars:40}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-widget__bottom">
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <i class="far fa-check-square fa-5x" style="opacity:0.4;"></i>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </div>  
+        </div>
+	</div>
+</div>
+
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript">
+(function($){
+	window.delete_branch = function (id){
+		$(document).on("click","#delete-"+id , function (e) {
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You won't be able to login from this device till you approve it again",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+				var url = "{% url 'reseller:delete_branch' %}";
+				if (result.value) {
+					$.post( url, { csrfmiddlewaretoken: '{{ csrf_token }}', id: id }, function( data ) {
+						if (data.status){
+							Swal.fire(
+								'Deleted!',
+								'The Device has been deleted.',
+								'success'
+							)
+							$('#branch-'+id).remove();
+						}
+						else{
+							Swal.fire(
+								'Error!',
+								'Error while deleting your device',
+								'Error'
+							)
+						}
+					});					
+				}
+			})
+		});
+	};
+})(jQuery);
+
+</script>
+{% endblock extrajs %}

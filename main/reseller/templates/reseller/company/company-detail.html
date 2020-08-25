@@ -1,0 +1,1026 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "RESELLER" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="row">
+    	<div class="col-xl-12">
+			<div class="kt-portlet kt-portlet--height-fluid">
+    			<div class="kt-portlet__body">
+        			<div class="kt-widget kt-widget--user-profile-3">
+            			<div class="kt-widget__top">
+                			<div class="kt-widget__media kt-hidden-">
+							 {% if company.logo %}
+									<img src="{{company.logo.url}}" alt="image" style="width: 200px;height: 130px;">{% endif %}
+                			</div>
+               	 			<div class="kt-widget__content">
+                    			<div class="kt-widget__head">
+                      	  			<a href="#" class="kt-widget__username">
+									 	{{company.name|upper}}
+										<i class="flaticon2-correct"></i>
+                        			</a>
+		                        <div class="kt-widget__action">
+        		                    <a type="button" href="{% url 'reseller:update_company' company.pk %}" 
+									class="btn btn-label-success btn-sm btn-upper"style="color:#ffffff;background-color:#268271">
+									{% trans "UPDATE" %}</a>&nbsp;
+										<a href="javascript:void(0)" 
+										class="btn btn-danger btn-sm btn-upper" 
+										id="delete-{{ company.id }}" onclick="delete_company({{ company.id }});" style="background-color:#fd1361;">
+										<i class="fas fa-times"style="padding:0px!important; " ></i></a>
+                        		</div>
+                    			</div>
+			                    <div class="kt-widget__subhead">
+            			            <a href="#"><i class="flaticon2-new-email"></i>{{company.user.email}}</a>
+                        			<a href="#"><i class="flaticon2-calendar-3"></i>{{company.user.username}} </a>
+                        			<a href="#"><i class="flaticon2-placeholder"></i>{{company.location.city|upper}}</a>
+                    			</div>
+			                    <div class="kt-widget__info">
+            			            <div class="kt-widget__desc">
+                        			    I distinguish three main text objektive could be merely to inform people.
+                            			<br> A second could be persuade people.You want people to bay objective
+                        			</div>
+                        			<div class="kt-widget__progress">
+                           		 		<div class="kt-widget__text">
+                                			Progress
+                            			</div>
+                            		<div class="progress" style="height: 5px;width: 100%;">
+                                		<div class="progress-bar kt-bg-success" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            			</div>
+                            			<div class="kt-widget__stats">
+                                			78%
+                           	 			</div>
+                        			</div>
+                    			</div>
+                			</div>
+            			</div>
+						<div class="kt-widget__bottom">
+							<div class="kt-widget__item">
+								<div class="kt-widget__icon">
+									<i class="flaticon-piggy-bank"></i>
+								</div>
+								<div class="kt-widget__details">
+									<span class="kt-widget__title">Earnings</span>
+									<span class="kt-widget__value"><span>$</span>249,500</span>
+								</div>
+							</div>
+
+							<div class="kt-widget__item">
+								<div class="kt-widget__icon">
+									<i class="flaticon-confetti"></i>
+								</div>
+								<div class="kt-widget__details">
+									<span class="kt-widget__title">Expances</span>
+									<span class="kt-widget__value"><span>$</span>164,700</span>
+								</div>
+							</div>
+
+							<div class="kt-widget__item">
+								<div class="kt-widget__icon">
+									<i class="flaticon-pie-chart"></i>
+								</div>
+								<div class="kt-widget__details">
+									<span class="kt-widget__title">Net</span>
+									<span class="kt-widget__value"><span>$</span>164,700</span>
+								</div>
+							</div>
+
+							<div class="kt-widget__item">
+								<div class="kt-widget__icon">
+									<i class="flaticon-file-2"></i>
+								</div>
+								<div class="kt-widget__details">
+									<span class="kt-widget__title">73 Tasks</span>
+									<a href="#" class="kt-widget__value kt-font-brand">View</a>
+								</div>
+							</div>
+
+							<div class="kt-widget__item">
+								<div class="kt-widget__icon">
+									<i class="flaticon-chat-1"></i>
+								</div>
+								<div class="kt-widget__details">
+									<span class="kt-widget__title">648 Comments</span>
+									<a href="#" class="kt-widget__value kt-font-brand">View</a>
+								</div>
+							</div>
+
+							<div class="kt-widget__item">
+								<div class="kt-widget__icon">
+									<i class="flaticon-network"></i>
+								</div>
+								<div class="kt-widget__details">
+									<div class="kt-section__content kt-section__content--solid">
+										<div class="kt-media-group">
+											<a href="#" class="kt-media kt-media--sm kt-media--circle" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="John Myer">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_1.jpg" alt="image">
+											</a>
+											<a href="#" class="kt-media kt-media--sm kt-media--circle" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="Alison Brandy">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_10.jpg" alt="image">
+											</a>
+											<a href="#" class="kt-media kt-media--sm kt-media--circle" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="Micheal York">
+												<span>+3</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div> 
+    </div>
+	<div class="row" style="margin-bottom:20px!important;">
+    	<div class="kt-portlet">
+        	<div class="kt-portlet__body  kt-portlet__body--fit">
+            	<div class="row row-no-padding row-col-separator-xl">
+                	<div class="col-xl-4">
+						<div class="kt-portlet kt-portlet--height-fluid">
+							<div class="kt-widget14">
+								<div class="kt-widget14__header kt-margin-b-30">
+									<h3 class="kt-widget14__title">
+										{% trans "Company Description" %}             
+									</h3>
+									<span class="kt-widget14__desc" style="word-break: break-all;">
+										{{company.body}}
+									</span>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<div class="col-xl-4">
+						<div class="kt-portlet kt-portlet--height-fluid">
+							<div class="kt-widget14">
+								<div class="kt-widget14__header">
+									<h3 class="kt-widget14__title">
+										{% trans "Company Adrress" %}
+									</h3>
+									<span class="kt-widget14__desc">
+										{{company.location.address}}
+									</span>
+								</div>	 
+								<div class="kt-widget14__content">	
+									<div class="kt-widget14__chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+										<div class="kt-widget14__stat">	<img class="kt-widget__img kt-hidden-" src={% static 'reseller/img/address.png' %} alt="image" style="width:50px!important;"></div>
+										<canvas id="kt_chart_profit_share" style="height: 140px; width: 140px; display: block;" width="140" height="140" class="chartjs-render-monitor"></canvas>
+									</div> 
+									<div class="kt-widget14__legends">
+										<div class="kt-widget14__legend">
+											<span class="kt-widget14__bullet kt-bg-success"></span>
+											<span class="kt-widget14__stats">{{company.location.state}}</span>
+										</div>
+										<div class="kt-widget14__legend">
+											<span class="kt-widget14__bullet kt-bg-warning"></span>
+											<span class="kt-widget14__stats">{{company.location.tel}}</span>
+										</div>
+										<div class="kt-widget14__legend">
+											<span class="kt-widget14__bullet kt-bg-brand"></span>
+											<span class="kt-widget14__stats">{{company.location.mail}}</span>
+										</div>
+									</div>			
+								</div> 
+							</div>
+						</div>		
+			        </div>
+            	    <div class="col-xl-4">
+						<div class="kt-portlet kt-portlet--height-fluid">
+							<div class="kt-widget14">
+								<div class="kt-widget14__header">
+									<h3 class="kt-widget14__title">
+										Revenue Change            
+									</h3>
+									<span class="kt-widget14__desc">
+										Revenue change breakdown by cities
+									</span>
+								</div>
+								<div class="kt-widget14__content">
+									<div class="kt-widget14__chart">
+										<div id="kt_chart_revenue_change" style="height: 150px; width: 150px;"><svg height="150" version="1.1" width="150" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; left: -0.8125px; top: -0.578125px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.3.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><path fill="none" stroke="#34bfa3" d="M75,118.33333333333334A43.333333333333336,43.333333333333336,0,0,0,117.85251574201737,68.56263467263734" stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path><path fill="#34bfa3" stroke="#ffffff" d="M75,121.33333333333334A46.333333333333336,46.333333333333336,0,0,0,120.8192283703109,68.11697091920455L134.3342525658702,66.08672493134401A60,60,0,0,1,75,135Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#fd3995" d="M117.85251574201737,68.56263467263734A43.333333333333336,43.333333333333336,0,0,0,82.89188458674082,32.39136313554092" stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path><path fill="#fd3995" stroke="#ffffff" d="M120.8192283703109,68.11697091920455A46.333333333333336,46.333333333333336,0,0,0,83.43824582736133,29.441534429539914L85.92722481241034,16.003425879979744A60,60,0,0,1,134.3342525658702,66.08672493134401Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#366cf3" d="M82.89188458674082,32.39136313554092A43.333333333333336,43.333333333333336,0,1,0,74.98638643205842,118.33333119491907" stroke-width="2" opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1;"></path><path fill="#366cf3" stroke="#ffffff" d="M83.43824582736133,29.441534429539914A46.333333333333336,46.333333333333336,0,1,0,74.98544395427786,121.333331046875L74.97957964808764,139.9999967923786A65,65,0,1,1,86.83782688011121,11.087044703311392Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="75" y="65" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="15px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 15px; font-weight: 800;" font-weight="800" transform="matrix(1.2745,0,0,1.2745,-20.6783,-20.1765)" stroke-width="0.7846153846153845"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Paris</tspan></text><text x="75" y="85" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="14px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 14px;" transform="matrix(0.9028,0,0,0.9028,7.3015,7.4861)" stroke-width="1.1076923076923078"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">20</tspan></text></svg></div>
+									</div>  		 
+									<div class="kt-widget14__legends">
+										<div class="kt-widget14__legend">
+											<span class="kt-widget14__bullet kt-bg-success"></span>
+											<span class="kt-widget14__stats">+10% New York</span>
+										</div>
+										<div class="kt-widget14__legend">
+											<span class="kt-widget14__bullet kt-bg-warning"></span>
+											<span class="kt-widget14__stats">-7% London</span>
+										</div>
+										<div class="kt-widget14__legend">
+											<span class="kt-widget14__bullet kt-bg-brand"></span>
+											<span class="kt-widget14__stats">+20% California</span>
+										</div>
+									</div>		 
+								</div> 	 
+							</div>
+						</div>	
+					</div>
+   				 </div>
+        	</div>
+    	</div>
+	</div>
+	<div class="row">
+    	<div class="col-xl-6">
+			<div class="kt-portlet kt-portlet--height-fluid">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-label">
+						<h3 class="kt-portlet__head-title">
+							Download Files
+						</h3>
+					</div>
+					<div class="kt-portlet__head-toolbar">
+						<a href="#" class="btn btn-label-brand btn-bold btn-sm dropdown-toggle" data-toggle="dropdown">
+							Latest
+						</a>
+						<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
+							<ul class="kt-nav">
+    							<li class="kt-nav__head">
+        							Export Options                                    
+        							<span data-toggle="kt-tooltip" data-placement="right" title="" data-original-title="Click to learn more...">
+            							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand kt-svg-icon--md1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<rect x="0" y="0" width="24" height="24"></rect>
+												<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"></circle>
+												<rect fill="#000000" x="11" y="10" width="2" height="7" rx="1"></rect>
+												<rect fill="#000000" x="11" y="7" width="2" height="2" rx="1"></rect>
+											</g>
+										</svg>        
+									</span>
+								</li>
+									<li class="kt-nav__separator"></li>
+									<li class="kt-nav__item">
+										<a href="#" class="kt-nav__link">
+											<i class="kt-nav__link-icon flaticon2-drop"></i>
+											<span class="kt-nav__link-text">Activity</span>
+										</a>
+									</li>
+									<li class="kt-nav__item">
+										<a href="#" class="kt-nav__link">
+											<i class="kt-nav__link-icon flaticon2-calendar-8"></i>
+											<span class="kt-nav__link-text">FAQ</span>
+										</a>
+									</li>
+									<li class="kt-nav__item">
+										<a href="#" class="kt-nav__link">
+											<i class="kt-nav__link-icon flaticon2-telegram-logo"></i>
+											<span class="kt-nav__link-text">Settings</span>
+										</a>
+									</li>
+									<li class="kt-nav__item">
+										<a href="#" class="kt-nav__link">
+											<i class="kt-nav__link-icon flaticon2-new-email"></i>
+											<span class="kt-nav__link-text">Support</span>
+											<span class="kt-nav__link-badge">
+												<span class="kt-badge kt-badge--success kt-badge--rounded">5</span>
+											</span>
+										</a>
+									</li>
+									<li class="kt-nav__separator"></li>
+									<li class="kt-nav__foot">
+										<a class="btn btn-label-danger btn-bold btn-sm" href="#">Upgrade plan</a>                                    
+										<a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="" data-original-title="Click to learn more...">Learn more</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="kt-portlet__body">
+						<!--begin::k-widget4-->
+						<div class="kt-widget4">
+							<div class="kt-widget4__item">
+								<div class="kt-widget4__pic kt-widget4__pic--icon">
+									<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/files/doc.svg" alt="">  
+								</div>				
+								<a href="#" class="kt-widget4__title">
+									Metronic Documentation
+								</a>						
+								<div class="kt-widget4__tools">
+									<a href="#" class="btn btn-clean btn-icon btn-sm">
+										<i class="flaticon2-download-symbol-of-down-arrow-in-a-rectangle"></i>
+									</a>
+								</div>				
+							</div>
+
+							<div class="kt-widget4__item">
+								<div class="kt-widget4__pic kt-widget4__pic--icon">
+									<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/files/jpg.svg" alt=""> 
+								</div>				 
+								<a href="#" class="kt-widget4__title">
+									Project Launch Event
+								</a>
+								<div class="kt-widget4__tools">
+									<a href="#" class="btn btn-clean btn-icon btn-sm">
+										<i class="flaticon2-download-symbol-of-down-arrow-in-a-rectangle"></i>
+									</a>
+								</div>				
+							</div>
+
+							<div class="kt-widget4__item">
+								<div class="kt-widget4__pic kt-widget4__pic--icon">
+									<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/files/pdf.svg" alt="">   
+								</div>
+								<a href="#" class="kt-widget4__title">
+									Full Developer Manual For 4.7											 	 
+								</a>				
+								<div class="kt-widget4__tools">
+									<a href="#" class="btn btn-clean btn-icon btn-sm">
+										<i class="flaticon2-download-symbol-of-down-arrow-in-a-rectangle"></i>
+									</a>
+								</div>				
+							</div>
+
+							<div class="kt-widget4__item">
+								<div class="kt-widget4__pic kt-widget4__pic--icon">
+									<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/files/javascript.svg" alt=""> 
+								</div>
+								<a href="#" class="kt-widget4__title">
+									Make JS Development
+								</a>
+								<div class="kt-widget4__tools">
+									<a href="#" class="btn btn-clean btn-icon btn-sm">
+										<i class="flaticon2-download-symbol-of-down-arrow-in-a-rectangle"></i>
+									</a>
+								</div>				
+							</div>
+
+							<div class="kt-widget4__item">
+								<div class="kt-widget4__pic kt-widget4__pic--icon">
+									<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/files/zip.svg" alt=""> 
+								</div>
+								<a href="#" class="kt-widget4__title">
+									Download Ziped version OF 5.0 													 
+								</a>				
+								<div class="kt-widget4__tools">
+									<a href="#" class="btn btn-clean btn-icon btn-sm">
+										<i class="flaticon2-download-symbol-of-down-arrow-in-a-rectangle"></i>
+									</a>
+								</div>				
+							</div>
+
+							<div class="kt-widget4__item">
+								<div class="kt-widget4__pic kt-widget4__pic--icon">
+									<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/files/pdf.svg" alt=""> 
+								</div>
+								<a href="#" class="kt-widget4__title">
+									Finance Report 2016/2017 											 
+								</a>				
+								<div class="kt-widget4__tools">
+									<a href="#" class="btn btn-clean btn-icon btn-sm">
+										<i class="flaticon2-download-symbol-of-down-arrow-in-a-rectangle"></i>
+									</a>
+								</div>				
+							</div>
+						</div>
+						<!--end::Widget 9-->
+					</div>
+				</div>
+		    </div>
+			<div class="col-xl-6">
+				<div class="kt-portlet kt-portlet--height-fluid">
+					<div class="kt-portlet__head">
+						<div class="kt-portlet__head-label">
+							<h3 class="kt-portlet__head-title">
+								User Progress
+							</h3>
+						</div>
+						<div class="kt-portlet__head-toolbar">
+							<ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold" role="tablist">
+								<li class="nav-item">					
+									<a class="nav-link active" data-toggle="tab" href="#kt_widget31_tab1_content" role="tab">					
+										Today
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" data-toggle="tab" href="#kt_widget31_tab2_content" role="tab">					
+										Week
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="kt-portlet__body">
+						<div class="tab-content">
+							<div class="tab-pane active" id="kt_widget31_tab1_content">
+								<div class="kt-widget31">
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_4.jpg" alt="">   
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Anna Strong
+												</a>
+												<p class="kt-widget31__text">
+													Visual Designer,Google Inc 
+												</p>							 		 
+											</div>					 
+										</div>
+
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<a href="#" class="kt-widget31__stats">
+													<span>63%</span>
+													<span>London</span>						    							 
+												</a>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-brand" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>						
+									</div>
+
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_14.jpg" alt="">      
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Milano Esco
+												</a>
+												<p class="kt-widget31__text">
+													Product Designer, Apple Inc 
+												</p>							 		 
+											</div>
+										</div>
+
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<a href="#" class="kt-widget31__stats">
+													<span>33%</span>
+													<span>Paris</span>						    							 
+												</a>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>							 
+									</div>
+
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic kt-widget4__pic--pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_11.jpg" alt="">    
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Nick Bold
+												</a>
+												<p class="kt-widget31__text">
+													Web Developer, Facebook Inc 
+												</p>							 		 
+											</div>
+										</div>
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<a href="#" class="kt-widget31__stats">
+													<span>13%</span>
+													<span>London</span>						    							 
+												</a>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>						
+									</div>
+
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic kt-widget4__pic--pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_1.jpg" alt="">    
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Wiltor Delton
+												</a>
+												<p class="kt-widget31__text">
+													Project Manager, Amazon Inc 
+												</p>							 		 
+											</div>
+										</div>	
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<div class="kt-widget31__stats">
+													<span>93%</span>
+													<span>New York</span>						    							 
+												</div>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-danger" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>						
+									</div>	
+
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_6.jpg" alt="">    
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Sam Stone
+												</a>
+												<p class="kt-widget31__text">
+													Project Manager, Kilpo Inc 
+												</p>							 		 
+											</div>
+										</div>
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<div class="kt-widget31__stats">
+													<span>50%</span>
+													<span>New York</span>						    							 
+												</div>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>													 
+									</div>	
+								</div>            
+							</div>
+							<div class="tab-pane" id="kt_widget31_tab2_content">
+								<div class="kt-widget31">
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic kt-widget4__pic--pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_11.jpg" alt="">    
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Nick Bold
+												</a>
+												<p class="kt-widget31__text">
+													Web Developer, Facebook Inc 
+												</p>							 		 
+											</div>
+										</div>
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<a href="#" class="kt-widget31__stats">
+													<span>13%</span>
+													<span>London</span>						    							 
+												</a>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>						
+									</div>
+
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic kt-widget4__pic--pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_1.jpg" alt="">    
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Wiltor Delton
+												</a>
+												<p class="kt-widget31__text">
+													Project Manager, Amazon Inc 
+												</p>							 		 
+											</div>
+										</div>	
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<div class="kt-widget31__stats">
+													<span>93%</span>
+													<span>New York</span>						    							 
+												</div>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-danger" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>						
+									</div>	
+
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_14.jpg" alt="">      
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Milano Esco
+												</a>
+												<p class="kt-widget31__text">
+													Product Designer, Apple Inc 
+												</p>							 		 
+											</div>
+										</div>
+
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<a href="#" class="kt-widget31__stats">
+													<span>33%</span>
+													<span>Paris</span>						    							 
+												</a>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>							 
+									</div>	
+									
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_6.jpg" alt="">    
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Sam Stone
+												</a>
+												<p class="kt-widget31__text">
+													Project Manager, Kilpo Inc 
+												</p>							 		 
+											</div>
+										</div>
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<div class="kt-widget31__stats">
+													<span>50%</span>
+													<span>New York</span>						    							 
+												</div>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>													 
+									</div>
+
+									<div class="kt-widget31__item">
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__pic">
+												<img src="/metronic/themes/metronic/theme/default/demo4/dist/assets/media/users/100_4.jpg" alt="">   
+											</div>
+											<div class="kt-widget31__info">
+												<a href="#" class="kt-widget31__username">
+													Anna Strong
+												</a>
+												<p class="kt-widget31__text">
+													Visual Designer,Google Inc 
+												</p>							 		 
+											</div>					 
+										</div>
+
+										<div class="kt-widget31__content">
+											<div class="kt-widget31__progress">
+												<a href="#" class="kt-widget31__stats">
+													<span>63%</span>
+													<span>London</span>						    							 
+												</a>
+												<div class="progress progress-sm">
+													<div class="progress-bar bg-brand" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>	
+											<a href="#" class="btn-label-brand btn btn-sm btn-bold">Follow</a>													
+										</div>						
+									</div>											
+								</div>  		
+							</div>
+						</div>
+					</div>
+				</div>
+		    </div>
+		</div>
+		<div class="row">
+    		<div class="col-xl-6">
+				<div class="kt-portlet kt-portlet--height-fluid">
+					<div class="kt-portlet__head">
+						<div class="kt-portlet__head-label">
+							<h3 class="kt-portlet__head-title">
+								Latest Updates
+							</h3>
+						</div>
+						<div class="kt-portlet__head-toolbar">
+							<a href="#" class="btn btn-label-brand btn-bold btn-sm dropdown-toggle" data-toggle="dropdown">
+								Today
+							</a>
+							<div class="dropdown-menu dropdown-menu-fit dropdown-menu-md dropdown-menu-right">
+								<ul class="kt-nav">
+									<li class="kt-nav__head">
+										Export Options                                    
+										<span data-toggle="kt-tooltip" data-placement="right" title="" data-original-title="Click to learn more...">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand kt-svg-icon--md1">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect x="0" y="0" width="24" height="24"></rect>
+										<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"></circle>
+										<rect fill="#000000" x="11" y="10" width="2" height="7" rx="1"></rect>
+										<rect fill="#000000" x="11" y="7" width="2" height="2" rx="1"></rect>
+									</g>
+								</svg>        </span>
+								</li>
+									<li class="kt-nav__separator"></li>
+									<li class="kt-nav__item">
+										<a href="#" class="kt-nav__link">
+											<i class="kt-nav__link-icon flaticon2-drop"></i>
+											<span class="kt-nav__link-text">Activity</span>
+										</a>
+									</li>
+					<li class="kt-nav__item">
+						<a href="#" class="kt-nav__link">
+							<i class="kt-nav__link-icon flaticon2-calendar-8"></i>
+							<span class="kt-nav__link-text">FAQ</span>
+						</a>
+					</li>
+					<li class="kt-nav__item">
+						<a href="#" class="kt-nav__link">
+							<i class="kt-nav__link-icon flaticon2-telegram-logo"></i>
+							<span class="kt-nav__link-text">Settings</span>
+						</a>
+					</li>
+					<li class="kt-nav__item">
+						<a href="#" class="kt-nav__link">
+							<i class="kt-nav__link-icon flaticon2-new-email"></i>
+							<span class="kt-nav__link-text">Support</span>
+							<span class="kt-nav__link-badge">
+								<span class="kt-badge kt-badge--success kt-badge--rounded">5</span>
+							</span>
+						</a>
+					</li>
+					<li class="kt-nav__separator"></li>
+					<li class="kt-nav__foot">
+						<a class="btn btn-label-danger btn-bold btn-sm" href="#">Upgrade plan</a>                                    
+						<a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="" data-original-title="Click to learn more...">Learn more</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="kt-portlet__body">
+		<div class="kt-widget4">
+			<div class="kt-widget4__item">
+				<span class="kt-widget4__icon">
+					<i class="flaticon-pie-chart-1 kt-font-info"></i>
+				</span>	
+				<a href="#" class="kt-widget4__title kt-widget4__title--light">
+					Metronic v6 has been arrived!
+				</a> 		
+				<span class="kt-widget4__number kt-font-info">+500</span>
+			</div>
+
+			<div class="kt-widget4__item">
+				<span class="kt-widget4__icon">
+					<i class="flaticon-safe-shield-protection  kt-font-success"></i>
+				</span>	
+				<a href="#" class="kt-widget4__title kt-widget4__title--light">
+					Metronic community meet-up 2019 in Rome.
+				</a> 		
+				<span class="kt-widget4__number kt-font-success">+1260</span>
+			</div>
+
+			<div class="kt-widget4__item">
+				<span class="kt-widget4__icon">
+					<i class="flaticon2-line-chart kt-font-danger"></i>
+				</span>	
+				<a href="#" class="kt-widget4__title kt-widget4__title--light">
+					Metronic Angular 8 version will be landing soon...
+				</a> 		
+				<span class="kt-widget4__number kt-font-danger">+1080</span>
+			</div>
+
+			<div class="kt-widget4__item">
+				<span class="kt-widget4__icon">
+					<i class="flaticon2-pie-chart-1 kt-font-primary"></i>
+				</span>	
+				<a href="#" class="kt-widget4__title kt-widget4__title--light">
+					ale! Purchase Metronic at 70% off for limited time
+				</a> 		
+				<span class="kt-widget4__number kt-font-primary">70% Off!</span>
+			</div>
+
+			<div class="kt-widget4__item">
+				<span class="kt-widget4__icon">
+					<i class="flaticon2-rocket kt-font-brand"></i>
+				</span>	
+				<a href="#" class="kt-widget4__title kt-widget4__title--light">
+					Metronic VueJS version is in progress. Stay tuned!
+				</a> 		
+				<span class="kt-widget4__number kt-font-brand">+134</span>
+			</div>
+
+			<div class="kt-widget4__item">
+				<span class="kt-widget4__icon">
+					<i class="flaticon2-notification kt-font-warning"></i>
+				</span>	
+				<a href="#" class="kt-widget4__title kt-widget4__title--light">
+					Black Friday! Purchase Metronic at ever lowest 90% off for limited time
+				</a> 		
+				<span class="kt-widget4__number kt-font-warning">70% Off!</span>
+			</div>
+
+			<div class="kt-widget4__item">
+				<span class="kt-widget4__icon">
+					<i class="flaticon2-file kt-font-success"></i>
+				</span>	
+				<a href="#" class="kt-widget4__title kt-widget4__title--light">
+					Metronic React version is in progress.
+				</a> 		
+				<span class="kt-widget4__number kt-font-success">+13%</span>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="col-xl-6">
+	<div class="kt-portlet kt-portlet--height-fluid">
+		<div class="kt-portlet__head">
+			<div class="kt-portlet__head-label">
+				<h3 class="kt-portlet__head-title">
+					Notifications
+				</h3>
+			</div>
+			<div class="kt-portlet__head-toolbar">
+				<ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#kt_widget6_tab1_content" role="tab">
+							Latest
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#kt_widget6_tab2_content" role="tab">
+							Week
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#kt_widget6_tab3_content" role="tab">
+							Month
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="kt-portlet__body">
+			<div class="tab-content">
+				<div class="tab-pane active" id="kt_widget6_tab1_content" aria-expanded="true">
+					<div class="kt-notification">
+						<a href="#" class="kt-notification__item">
+							<div class="kt-notification__item-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect x="0" y="0" width="24" height="24"></rect>
+										<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
+										<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
+									</g>
+								</svg>                        
+							</div>
+							<div class="kt-notification__item-details">
+								<div class="kt-notification__item-title">
+									New order has been received.
+								</div>
+								<div class="kt-notification__item-time">
+									2 hrs ago
+								</div>
+							</div>
+						</a>
+						<a href="#" class="kt-notification__item">
+							<div class="kt-notification__item-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect x="0" y="0" width="24" height="24"></rect>
+										<path d="M12,10.9996338 C12.8356605,10.3719448 13.8743941,10 15,10 C17.7614237,10 20,12.2385763 20,15 C20,17.7614237 17.7614237,20 15,20 C13.8743941,20 12.8356605,19.6280552 12,19.0003662 C11.1643395,19.6280552 10.1256059,20 9,20 C6.23857625,20 4,17.7614237 4,15 C4,12.2385763 6.23857625,10 9,10 C10.1256059,10 11.1643395,10.3719448 12,10.9996338 Z M13.3336047,12.504354 C13.757474,13.2388026 14,14.0910788 14,15 C14,15.9088933 13.7574889,16.761145 13.3336438,17.4955783 C13.8188886,17.8206693 14.3938466,18 15,18 C16.6568542,18 18,16.6568542 18,15 C18,13.3431458 16.6568542,12 15,12 C14.3930587,12 13.8175971,12.18044 13.3336047,12.504354 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+										<circle fill="#000000" cx="12" cy="9" r="5"></circle>
+									</g>
+								</svg>                        
+							</div>
+							<div class="kt-notification__item-details">
+								<div class="kt-notification__item-title">
+									Membership application has been added.
+								</div>
+								<div class="kt-notification__item-time">
+									3 hrs ago
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="tab-pane" id="kt_widget6_tab2_content" aria-expanded="false">
+					<div class="kt-notification">
+						<a href="#" class="kt-notification__item">
+							<div class="kt-notification__item-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--success">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect x="0" y="0" width="24" height="24"></rect>
+										<path d="M9.35321926,16.3736278 L16.3544311,10.3706602 C16.5640654,10.1909158 16.5882961,9.87526197 16.4085517,9.66562759 C16.3922584,9.64662485 16.3745611,9.62887247 16.3556091,9.6125202 L9.35439731,3.57169798 C9.14532254,3.39130299 8.82959492,3.41455255 8.64919993,3.62362732 C8.5708616,3.71442013 8.52776329,3.83034375 8.52776329,3.95026134 L8.52776329,15.9940512 C8.52776329,16.2701936 8.75162092,16.4940512 9.02776329,16.4940512 C9.14714624,16.4940512 9.2625893,16.4513356 9.35321926,16.3736278 Z" fill="#000000" transform="translate(12.398118, 9.870355) rotate(-450.000000) translate(-12.398118, -9.870355) "></path>
+										<rect fill="#000000" opacity="0.3" transform="translate(12.500000, 17.500000) scale(-1, 1) rotate(-270.000000) translate(-12.500000, -17.500000) " x="11" y="11" width="3" height="13" rx="0.5"></rect>
+									</g>
+								</svg>                        
+							</div>
+							<div class="kt-notification__item-details">
+								<div class="kt-notification__item-title">
+									New company application has been approved.
+								</div>
+								<div class="kt-notification__item-time">
+									3 hrs ago
+								</div>
+							</div>
+						</a>
+						<a href="#" class="kt-notification__item">
+							<div class="kt-notification__item-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect x="0" y="0" width="24" height="24"></rect>
+										<rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13" rx="1.5"></rect>
+										<rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8" rx="1.5"></rect>
+										<path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"></path>
+										<rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6" rx="1.5"></rect>
+									</g>
+								</svg>
+							</div>
+							<div class="kt-notification__item-details">
+								<div class="kt-notification__item-title">
+									New report has been received.
+								</div>
+								<div class="kt-notification__item-time">
+									23 hrs ago
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="tab-pane" id="kt_widget6_tab3_content" aria-expanded="false">
+					<div class="kt-notification">
+						<a href="#" class="kt-notification__item">
+							<div class="kt-notification__item-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--warning">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect opacity="0.200000003" x="0" y="0" width="24" height="24"></rect>
+										<path d="M4.5,7 L9.5,7 C10.3284271,7 11,7.67157288 11,8.5 C11,9.32842712 10.3284271,10 9.5,10 L4.5,10 C3.67157288,10 3,9.32842712 3,8.5 C3,7.67157288 3.67157288,7 4.5,7 Z M13.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L13.5,18 C12.6715729,18 12,17.3284271 12,16.5 C12,15.6715729 12.6715729,15 13.5,15 Z" fill="#000000" opacity="0.3"></path>
+										<path d="M17,11 C15.3431458,11 14,9.65685425 14,8 C14,6.34314575 15.3431458,5 17,5 C18.6568542,5 20,6.34314575 20,8 C20,9.65685425 18.6568542,11 17,11 Z M6,19 C4.34314575,19 3,17.6568542 3,16 C3,14.3431458 4.34314575,13 6,13 C7.65685425,13 9,14.3431458 9,16 C9,17.6568542 7.65685425,19 6,19 Z" fill="#000000"></path>
+									</g>
+								</svg>                        
+							</div>
+							<div class="kt-notification__item-details">
+								<div class="kt-notification__item-title">
+									New customer comment recieved
+								</div>
+								<div class="kt-notification__item-time">
+									2 days ago
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript">
+(function($){
+	window.delete_company = function (id){
+		$(document).on("click","#delete-"+id , function (e) {
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You won't be able to login from this device till you approve it again",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+				var url = "{% url 'reseller:delete_company' %}";
+				if (result.value) {
+					$.post( url, { csrfmiddlewaretoken: '{{ csrf_token }}', id: id }, function( data ) {
+						if (data.status){
+							Swal.fire(
+								'Deleted!',
+								'The Device has been deleted.',
+								'success'
+							)
+							$('#company-'+id).remove();
+						}
+						else{
+							Swal.fire(
+								'Error!',
+								'Error while deleting your device',
+								'Error'
+							)
+						}
+					});					
+				}
+			})
+		});
+	};
+})(jQuery);
+</script>
+{% endblock extrajs %}

@@ -1,0 +1,70 @@
+{% load static i18n %}
+<div class="kt-grid kt-wizard-v1 kt-wizard-v1--white">
+	<div class="kt-grid__item"> 
+        <div class="kt-wizard-v1__nav">
+            <div class="kt-wizard-v1__nav-items kt-wizard-v1__nav-items--clickable">
+                <div class="kt-wizard-v1__nav-item" >
+                    <a href="{% url 'reseller:addresse_create' %}">
+                        <div class="kt-wizard-v1__nav-body">
+                            <div class="kt-wizard-v1__nav-icon">
+                                <i class="flaticon-bus-stop"></i>
+                            </div>
+                            <div class="kt-wizard-v1__nav-label">
+                                {% trans "1. Setup Location" %}
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'reseller:addresse_view' %}">{% trans "Addresse List" %}</a>
+                </div>
+                <div class="kt-wizard-v1__nav-item" >
+                    <a href="{% url 'reseller:create_company' %}">
+                        <div class="kt-wizard-v1__nav-body">
+                            <div class="kt-wizard-v1__nav-icon">
+                                <i class="flaticon2-layers-1"></i>
+                            </div>
+                            <div class="kt-wizard-v1__nav-label">
+                                {% trans "2. Enter Company" %}
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'reseller:company_list' %}">{% trans "Company List" %}</a>
+                </div>
+                 <div class="kt-wizard-v1__nav-item" >
+                    <a href="{% url 'reseller:create_branch' %}">
+                        <div class="kt-wizard-v1__nav-body">
+                            <div class="kt-wizard-v1__nav-icon">
+                                <i class="flaticon-globe"></i>
+                            </div>
+                            <div class="kt-wizard-v1__nav-label">
+                                {% trans "3. Enter Branches" %}
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'reseller:branch_list' %}">{% trans "Branches List" %}</a>
+                </div>
+                <div class="kt-wizard-v1__nav-item" >
+                <a href="{% url 'reseller:template-create' %}">
+                    <div class="kt-wizard-v1__nav-body">
+                        <div class="kt-wizard-v1__nav-icon">
+                                {% include 'reseller/includes/profile/document (2).svg' %}
+                        </div>
+                        <div class="kt-wizard-v1__nav-label">
+                            {% trans "4.Product Templates" %}
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'reseller:template_list' %}">{% trans "Product Template List" %}</a>
+                </div>
+                <div class="kt-wizard-v1__nav-item" style="margin-top:15px;margin-right:-105px;" >
+                    <a href="{% url 'reseller:profile_view' %}">
+                        <div class="kt-wizard-v1__nav-body">
+                                {% include 'reseller/includes/profile/user.svg' %}
+                            <div class="kt-wizard-v1__nav-label">
+                                {% trans "View PROFILE" %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>	
+    </div>

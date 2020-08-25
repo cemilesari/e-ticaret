@@ -1,0 +1,150 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% load widget_tweaks %}
+
+{% block title %}{% trans "Reseller" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %} 
+{% comment "" %}
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+	<div class="kt-content kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+            <div class="kt-container ">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        {% trans "Company Update" %} </h3>
+                        <div class="kt-subheader__breadcrumbs">
+                            <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                            <span class="kt-subheader__breadcrumbs-separator"></span>
+                            <a href="" class="kt-subheader__breadcrumbs-link">{% trans "Company Update" %} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endcomment %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="alert alert-light alert-elevate" role="alert">
+		<div class="kt-portlet kt-portlet--mobile">
+			<div class="kt-portlet__head kt-portlet__head--lg">
+				<div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+					    <i class="kt-font-brand flaticon2-line-chart"></i>
+					</span>
+					<h3 class="kt-portlet__head-title"> {% trans "YEMEK KALMASIN COMPANY UPDATE" %}</h3>
+				</div>
+				<div class="kt-portlet__head-toolbar">
+					<div class="kt-portlet__head-wrapper">
+				</div>
+			</div>	
+		</div>
+        <div class="kt-portlet__body">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0"> {{product.template.name}}</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <div class="kt-widget__action">
+                                <a type="button" href="{% url 'reseller:detail_company' company.id %}" 
+                                class="btn btn-success btn-sm btn-upper" style="background-color:#175b9b">
+                                 {% trans "Detail Company" %}
+                                </a>&nbsp;
+                                <a type="button" href="{% url 'reseller:company_list' %}" 
+                                class="btn btn-success btn-sm btn-upper" style="background-color:#175b9b">
+                                    {% trans "View All Companies" %}
+                                </a>&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'reseller:update_company' company.id %}">
+                        {% csrf_token %}
+                        <div class="pl-lg-4">
+                            <div class="kt-wizard-v1__form">
+                                <div class="form-group m-form__group row">
+									<div class="form-group m-form__group row">
+                                        <div class="col-lg-6">
+											<label class="form-label">{% trans "Logo" %}</label>
+										    <div class="custom-file">
+												<input type="file" name="logo" class="custom-file-input"><label class="custom-file-label">{% trans "Choose  img" %}</label>
+											</div>
+										</div>
+                                  	    <div class="col-xl-6">
+											<div class="form-group">
+                                             <label class="form-control-label"
+                                                for="{{ form.name.id_for_label }}">{% trans "Company Name" %}</label>
+											    {% render_field form.name|add_class:"form-control form-control-alternative"%}
+
+											</div>
+										</div>
+									    <div class="col-xl-12">
+											<div class="form-group">
+												 <label class="form-control-label"
+                                                for="{{ form.body.id_for_label }}">{% trans "Description" %}</label>
+												{% render_field form.body|add_class:"form-control form-control-alternative"%}
+
+											</div>
+										</div>
+                                        <div class="col-xl-4">
+                                            <label for="size">{% trans "Size" %}</label>
+                                            <select id="inputState" name="size" class="form-control">
+                                                {% for size in company.SIZES %}
+                                                <option value="{{ size.0 }}" {% if size.pk == form.instance.size.pk%}selected{% endif %}>
+                                                    {{ size.1 }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+										<div class="col-xl-4">
+											<div class="form-group">
+												<label for="category">{% trans "Category" %}</label>
+											    <select id="inputState" name="category" class="form-control">
+                                                   {% for category in company.CATEGORIES %}
+                                                    <option value="{{ category.0 }}" {% if branch.pk == form.instance.category.pk %}selected{% endif %}>
+                                                        {{ category.1 }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+											</div>
+										</div>
+										<div class="col-xl-4">
+											<div class="form-group">
+												<label for="location">{% trans "Location" %}</label>
+                                                <select id="inputState" name="location" class="form-control">
+                                                    {% for location in locations %}
+                                                    <option value="{{ location.id }}" {% if location.pk == form.instance.location.pk %}selected{% endif %}>
+                                                        {{ location.address }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+											</div>
+										</div>
+                                    </div>
+								</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 offset-4">
+                                    <button type="submit" class="btn btn-success btn-block">{% trans "Update" %}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
+{% block extrajs %}{% endblock extrajs %}
+
+
+
+

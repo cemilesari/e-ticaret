@@ -1,0 +1,55 @@
+{% load staticfiles i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{% block title %}{% trans "Home" %}{% endblock title %}</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="all,follow">
+	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+	<link href="{% static 'web/img/yemek-kalmasin-favicon.png' %}" type="image/x-icon" rel="icon">
+	<link href="{% static 'web/img/yemek-kalmasin-favicon.png' %}" type="image/png" sizes="14x14" rel="icon">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'reseller/css/plugins.bundle.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'reseller/css/style.bundle.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'reseller/css/plugins.bundle.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/wizard.css' %}" />
+{% block extracss %}{% endblock extracss %}
+</head>
+<body style="background-image : url('{{STATIC_URL}}reseller/img/header.jpg');  background-position: center top; background-size: 100% 350px;" 
+ class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+{% include "reseller/includes/base/header.html" %}
+{% block content %}{% endblock content %}
+{% include "reseller/includes/base/scrooltop.html" %}
+{% include "reseller/includes/base/footer.html" %}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'reseller/js/plugins.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/scripts.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/style.bundle.js'%}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/datatable.js'%}"></script>
+<script type="text/javascript" src="{% static 'reseller/global.js' %}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/1.js'%}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/2.js'%}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/3.js'%}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/4.js'%}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/5.js'%}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/6.js'%}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
+<script type="text/javascript" src="{% static 'reseller/js/ck.js'%}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/ckeditor.js'%}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/fileupload.js'%}"></script>
+<script type="text/javascript" src="{% static 'web/js/wizard.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'reseller/js/validation.js' %}"></script>
+{% block extrajs %}{% endblock extrajs %}
+</body>
+</html>

@@ -1,0 +1,94 @@
+{% load static i18n %}
+<!-- begin:: Header Mobile -->
+<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+	<div class="kt-header-mobile__logo">
+		<a href="index.html">
+			<img alt="Logo" src="{% static 'web/img/yemek-kalmasin.svg' %}" />
+		</a>
+	</div>
+	<div class="kt-header-mobile__toolbar">
+		<button class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler">
+			<span></span>
+		</button>
+		<button class="kt-header-mobile__toolbar-topbar-toggler" id="kt_header_mobile_topbar_toggler">
+			<i class="flaticon-more-1"></i>
+		</button>
+	</div>
+</div>
+<!-- end:: Header Mobile -->
+
+<div class="kt-grid kt-grid--hor kt-grid--root">
+	<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+		<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+			<div id="kt_header" class="kt-header  kt-header--fixed " data-ktheader-minimize="on">
+				<div class="kt-container ">
+					<div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
+						<a class="kt-header__brand-logo" href="?page=index">
+							<img alt="Logo" style="height:55px!important;width:80px!important;" src="{% static 'web/img/yemek-kalmasin.svg' %}"class="kt-header__brand-logo-default" />
+							<img alt="Logo" style="height:55px!important;width:80px!important;" src="{% static 'web/img/yemek-kalmasin.svg' %}" class="kt-header__brand-logo-sticky" />
+						</a>
+					</div>
+					<button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn">
+						<i class="la la-close"></i>
+					</button>
+					<div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_header_menu_wrapper">
+						<div class="kt-header-menu kt-header-menu-mobile ">
+							<ul class="kt-menu__nav ">
+								<li class="kt-menu__item  kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here">
+									<a href="/" class="kt-menu__link kt-menu__toggle">
+										<span class="kt-menu__link-text">
+                                            {% trans "Dashboard" %}
+                                        </span>
+										<i class="kt-menu__ver-arrow la la-angle-right"></i>
+									</a>
+								</li>
+								 {% if user.is_authenticated %}
+								<li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" >
+									<a href="{% url 'reseller:profile_view' %}" class="kt-menu__link kt-menu__toggle">
+										<span class="kt-menu__link-text">
+                                            {% trans "Reseller" %}
+                                        </span>
+										<i class="kt-menu__ver-arrow la la-angle-right"></i>
+									</a>
+								</li>
+								{% endif %}
+								<li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" >
+									<a href="https://yemekkalmasin.com" class="kt-menu__link kt-menu__toggle">
+										<span class="kt-menu__link-text">{% trans "Yemek Kalmasın" %}</span>
+										<i class="kt-menu__ver-arrow la la-angle-right"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+                    <div class="kt-header__topbar kt-grid__item">
+                        <div class="kt-header__topbar-item kt-header__topbar-item--search dropdown" id="kt_quick_search_toggle">
+                            <div class="kt-header__topbar-item dropdown">
+                                <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                                        {% if user.is_authenticated %}
+                                    <div class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="{% trans "Profile" %}" data-placement="top">
+                                        <a style="height:38px;margin-top:25px; margin-right:5px!important; line-height:1.0rem;width: max-content;" href="{% url 'reseller:addresse_create' %}" class="btn btn-danger kt-subheader__btn-options">{{user.full_name}}</a>
+                                    </div>
+                                    <div class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="{% trans "Logout" %}" data-placement="top">
+                                        <a style="height:38px;margin-top:20px; margin-right:5px!important;width:38px;" href="{% url 'users:logout_view' %}" class="btn btn-danger kt-subheader__btn-options">
+                                            <i class="flaticon-logout "></i>
+                                        </a>
+                                    </div>
+                                    {% else %}
+                                    <div class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="Quick actions" data-placement="top">
+                                        <a style="margin-top:20px; margin-right:5px!important;" href="{% url 'users:login' %}" class="btn btn-danger kt-subheader__btn-options">
+                                    {% trans "Login" %}
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+			<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+				<div class="kt-content kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+					<div class="kt-container  kt-grid__item kt-grid__item--fluid">

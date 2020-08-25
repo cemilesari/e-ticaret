@@ -1,0 +1,105 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Profile" %}{% endblock title %}
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{% static 'web/css/wizard.css' %}" />
+{% endblock extracss %}
+{% block content %}
+{% comment "" %}
+{% include "reseller/includes/profile/header.html" %}
+{% endcomment %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="kt-portlet">
+		<div class="kt-portlet__body kt-portlet__body--fit">
+	        {% include "reseller/includes/profile/base.html" %}
+				<div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
+					<form class="needs-validation kt-form" action="{% url 'reseller:create_company' %}" enctype="multipart/form-data" method="post" novalidate>
+                        {% csrf_token %}
+						{% include 'includes/message.html' %}
+						<div class="kt-wizard-v1__content">
+							<div class="kt-heading kt-heading--md">
+                                {% trans "Setup Your Company " %}
+                            </div>
+							<div class="kt-form__section kt-form__section--first">
+								<div class="kt-wizard-v1__form">
+                                       <div class="form-group m-form__group row">
+										<div class="form-group m-form__group row">
+											<div class="col-lg-6">
+												<label class="form-label">{% trans "Logo" %}</label>
+												<div class="custom-file">
+													<input type="file" name="logo" class="custom-file-input" required>
+													<label class="custom-file-label">{% trans "Choose  img" %}</label>
+													<span class="form-text text-muted">{% trans "Please choice company logo" %}</span>
+												</div>
+											</div>
+											<div class="col-xl-6">
+												<div class="form-group">
+													<label>{% trans "Company Name" %}</label>
+													<input type="text" class="form-control" name="name" placeholder="Company Name" required>
+													<span class="form-text text-muted">{% trans "Please enter your company name" %}</span>
+												</div>
+											</div>
+											<div class="col-xl-12">
+												<div class="form-group">
+													<label>{% trans "Description" %}</label>
+													<input type="text" class="form-control" name="body" placeholder="Company Description" required>
+													<span class="form-text text-muted">{% trans "Please enter your company information" %}</span>
+												</div>
+											</div>
+											<div class="col-xl-4">
+												<div class="form-group">
+													<label>{% trans "Size" %}</label>
+													<select id="inputState" name="size" class="form-control" required>
+														{% for size in sizes %}
+															<option value="{{ size.0 }}">
+														{{ size.1 }}
+														</option>
+														{% endfor %}
+													</select>
+												</div>
+											</div>
+											<div class="col-xl-4">
+												<div class="form-group">
+													<label>{% trans "Category" %}</label>
+												<select id="inputState" name="category" class="form-control" required>
+														{% for category in categories %}
+															<option value="{{ category.0 }}">
+														{{ category.1 }}
+														</option>
+														{% endfor %}
+												</select>
+												</div>
+											</div>
+											<div class="col-xl-4">
+												<div class="form-group">
+													<label >{% trans "Location" %}</label>
+													<select id="inputState" name="location" class="form-control" required>
+														{% for location in locations %}
+															<option value="{{ location.id }}">
+															{{ location.address | upper }}
+															</option>
+														{% endfor %}
+													</select>
+												</div>
+											</div>
+										</div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<button type="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" >
+								{% trans "Submit" %}
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript" src="{% static 'web/js/wizard.js' %}"></script>
+{% endblock extrajs %}

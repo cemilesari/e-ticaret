@@ -1,0 +1,157 @@
+
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "RESELLER" %}{% endblock title %}
+{% load widget_tweaks %}
+
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+{% load i18n %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="alert alert-light alert-elevate" role="alert">
+		<div class="kt-portlet kt-portlet--mobile">
+			<div class="kt-portlet__head kt-portlet__head--lg">
+				<div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+					    <i class="kt-font-brand flaticon2-line-chart"></i>
+					</span>
+					<h3 class="kt-portlet__head-title"> {% trans "YEMEK KALMASIN TEMPLATE UPDATE" %}</h3>
+				</div>
+				<div class="kt-portlet__head-toolbar">
+					<div class="kt-portlet__head-wrapper">
+				</div>
+			</div>	
+		</div>
+        <div class="kt-portlet__body">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0"> {{template.name}}</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <div class="kt-widget__action">
+                                <a type="button" href="{% url 'reseller:template_detail' template.id %}" 
+                                class="btn btn-success btn-sm btn-upper" style="background-color:#175b9b">
+                                 {% trans "Detail Company" %}
+                                </a>&nbsp;
+                                <a type="button" href="{% url 'reseller:template_list' %}" 
+                                class="btn btn-success btn-sm btn-upper" style="background-color:#175b9b">
+                                    {% trans "View All Companies" %}
+                                </a>&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'reseller:template_update' template.id %}">
+                        {% csrf_token %}
+                        <div class="pl-lg-4">
+                            <div class="kt-wizard-v1__form">
+                                <div class="form-group m-form__group row">
+									<div class="form-group m-form__group row">
+                                        <div class="col-lg-6">
+											<label class="form-label">{% trans "Template Image" %}</label>
+										    <div class="custom-file">
+												<input type="file" name="image" class="custom-file-input"><label class="custom-file-label">{% trans "Choose  img" %}</label>
+											</div>
+										</div>
+                                  	    <div class="col-xl-6">
+											<div class="form-group">
+                                             <label class="form-control-label"
+                                                for="{{ form.name.id_for_label }}">{% trans "Template Name" %}</label>
+											    {% render_field form.name|add_class:"form-control form-control-alternative"%}
+
+											</div>
+										</div>
+									    <div class="col-xl-12">
+											<div class="form-group">
+												 <label class="form-control-label"
+                                                for="{{ form.body.id_for_label }}">{% trans "Description" %}</label>
+												{% render_field form.body|add_class:"form-control form-control-alternative"%}
+
+											</div>
+										</div>
+                                            <div class="form-group col-xl-3">
+                                                <label class="form-control-label"
+                                                for="{{ form.left.id_for_label }}">{% trans "Left" %}</label>
+                                                {% render_field form.left|add_class:"form-control form-control-alternative"%}
+                                            </div>
+                                            <div class="form-group col-xl-3">
+                                                <label class="form-control-label"for="{{ form.count.id_for_label }}">
+                                                    {% trans "Count" %}
+                                                </label>
+                                                    {% render_field form.count|add_class:"form-control form-control-alternative"%}
+                                            </div>
+                                            <div class="form-group col-xl-3">
+                                            <label class="form-control-label"
+                                                for="{{ form.original_price.id_for_label }}">{% trans "Original Price" %}</label>
+                                                {% render_field form.original_price|add_class:"form-control form-control-alternative"%}
+                                            </div>
+                                            <div class="form-group col-xl-3">
+                                            <label class="form-control-label"
+                                                for="{{ form.price.id_for_label }}">{% trans "Price" %}</label>
+                                                {% render_field form.price|add_class:"form-control form-control-alternative"%}
+                                            </div>
+                             
+										<div class="col-xl-3">
+											<div class="form-group">
+												<label for="category">{% trans "Category" %}</label>
+                                                <select id="inputState" name="category" class="form-control">
+                                                    {% for category in categories %}
+                                                    <option value="{{ category.id }}" {% if category.pk == form.instance.category.pk %}selected{% endif %}>
+                                                        {{ category.name }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+											</div>
+										</div>
+                                           <div class="col-xl-3">
+                                            <label for="currency">{% trans "Currency" %}</label>
+                                            <select id="inputState" name="currency" class="form-control">
+                                                {% for curr in template.CURRENCIES %}
+                                                <option value="{{ curr.0 }}" {% if curr.pk == form.instance.curr.pk%}selected{% endif %}>
+                                                    {{ curr.1 }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                            <div class="form-group col-md-3">
+                                        <label for="status">{% trans "Status" %}</label>
+                                        <select id="inputState" name="status" class="form-control">
+                                            {% for stat in template.STATUSES %}
+                                                <option value="{{ stat.0 }}" {% if status.pk == form.instance.status.pk%}selected{% endif %}>
+                                                {{ stat.1 }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                        <div class="col-xl-3">
+											<div class="form-group">
+												<label for="company">{% trans "Company" %}</label>
+                                                <select id="inputState" name="company" class="form-control">
+                                                    {% for comp in companies %}
+                                                    <option value="{{ comp.id }}" {% if comp.pk == form.instance.comp.pk %}selected{% endif %}>
+                                                        {{ comp.name }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+											</div>
+										</div>
+                                    </div>
+								</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 offset-4">
+                                    <button type="submit" class="btn btn-success btn-block">{% trans "Update" %}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extrajs %}{% endblock extrajs %}

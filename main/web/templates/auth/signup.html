@@ -1,0 +1,79 @@
+
+
+{% extends "auth/base.html" %}
+{% load i18n static %}
+{% block title %}{% trans "Register" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+<body style="background-image: url('{{STATIC_URL}}web/img/header-1.jpg'); background-position: center top;" 
+class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+	<div class="kt-grid kt-grid--ver kt-grid--root kt-page">
+		<div class="kt-grid kt-grid--hor kt-grid--root kt-login kt-login--v2 kt-login--signin" id="kt_login">
+	    	<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+		    	<div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+					<div class="kt-login__container">
+						<div class="kt-login__logo">
+							<a href="#">
+								<img  style="height: 100px!important;width: 150px!important;"src="{% static 'web/img/yemek-kalmasin.svg' %}">
+							</a>
+						</div>
+						<div class="kt-login__head">
+							<h3 class="kt-login__title">{% trans "Sign Up" %}</h3>
+							<div class="kt-login__desc">{% trans "Enter your details to create your account:" %}</div>
+							</div>
+							{% include "includes/message.html" %}
+								<form class="needs-validation kt-login__form kt-form" action="{% url 'users:signup_view' %}" method="POST" novalidate>
+                            		{% csrf_token %}
+									<div class="input-group">
+										<input class="form-control" type="text" placeholder="{% trans "Username" %}" name="username" required><br>
+									</div>
+									<div class="input-group">
+										<input class="form-control" type="text" placeholder="{% trans "Full Name" %}" name="full_name" required><br>
+									</div>
+									<div class="input-group">
+										<input class="form-control" type="email" placeholder="{% trans "Email" %}" name="email" required><br>
+									</div>
+									<div class="input-group">
+										<input class="form-control" type="password" placeholder="{% trans "Password" %}" name="password" required><br>
+									</div>
+									<div class="row kt-login__extra">
+										<div class="col kt-align-left">
+											<label class="kt-checkbox"for="invalidCheck3" required>
+												<input type="checkbox" id="invalidCheck3" name="terms">{% trans "I Agree the" %} <a href="#" class="kt-link kt-login__link kt-font-bold">terms and conditions</a>.
+												<span></span>
+											</label>
+											<br><span class="form-text text-muted"></span>
+										</div>
+									</div>
+									<div class="kt-login__actions">
+                                    	<button type="submit" class="btn btn-pill kt-login__btn-primary">{% trans "Sign Up" %}</button>&nbsp;&nbsp;
+										<a href="/" class="btn btn-pill kt-login__btn-secondary" style="    margin-top: 9px;">{% trans "Cancel" %}</a>
+
+                                	</div>
+                            	</form>
+
+                        	</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript" src="{% static 'assets/js/login-scripts.js' %}"></script>
+<script type="text/javascript" >
+(function ($) {
+    'use strict';
+    $(".needs-validation").validate({
+        errorClass: "is-invalid",
+        validClass: "is-valid",
+        errorPlacement: function (error, element) {
+            if(element.hasClass("select2") == true){
+                error.insertAfter(element.next());
+            }else{
+                error.insertAfter(element)
+            }},});
+})(window.jQuery);
+</script>
+{% endblock extrajs %}

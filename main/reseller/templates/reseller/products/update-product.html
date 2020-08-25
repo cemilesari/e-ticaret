@@ -1,0 +1,136 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% load widget_tweaks %}
+
+{% block title %}{% trans "Reseller" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="alert alert-light alert-elevate" role="alert">
+		<div class="kt-portlet kt-portlet--mobile">
+			<div class="kt-portlet__head kt-portlet__head--lg">
+				<div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+					    <i class="kt-font-brand flaticon2-line-chart"></i>
+					</span>
+					<h3 class="kt-portlet__head-title"> {% trans "YEMEK KALMASIN PRODUCT UPDATE" %}</h3>
+				</div>
+				<div class="kt-portlet__head-toolbar">
+					<div class="kt-portlet__head-wrapper">
+				</div>
+			</div>	
+		</div>
+        <div class="kt-portlet__body">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0"> {{product.template.name}}</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="{% url 'reseller:detail_product'  product.id %}" class="btn btn-sm btn-info">{% trans "Detail Product" %}</a>
+                            <a href="{% url 'reseller:product_list' %}" class="btn btn-sm btn-primary">{% trans "View All Product" %}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'reseller:update_product' product.id %}">
+                        {% csrf_token %}
+                        <div class="pl-lg-4">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="branch">{% trans "Branch" %}</label>
+                                        <select id="inputState" name="branch" class="form-control">
+                                            {% for branch in product.template.company.branches %}
+                                                <option value="{{ branch.id }}" {% if branch.pk == form.instance.branch.pk %}selected{% endif %}>
+                                            {{ branch.name }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="status">{% trans "Status" %}</label>
+                                        <select id="inputState" name="status" class="form-control">
+                                            {% for stat in product.STATUSES %}
+                                                <option value="{{ stat.0 }}" {% if status.pk == form.instance.status.pk%}selected{% endif %}>
+                                                {{ stat.1 }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label class="form-control-label"
+                                        for="{{ form.left.id_for_label }}">{% trans "Left" %}</label>
+                                        {% render_field form.left|add_class:"form-control form-control-alternative"%}
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                    <label class="form-control-label"
+                                        for="{{ form.count.id_for_label }}">{% trans "Count" %}</label>
+                                        {% render_field form.count|add_class:"form-control form-control-alternative"%}
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="form-control-label"
+                                        for="{{ form.original_price.id_for_label }}">{% trans "Original Price" %}</label>
+                                        {% render_field form.original_price|add_class:"form-control form-control-alternative"%}
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="form-control-label"
+                                        for="{{ form.price.id_for_label }}">{% trans "Price" %}</label>
+                                        {% render_field form.price|add_class:"form-control form-control-alternative"%}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    {% comment "" %}
+                                    name unutma aptal
+                                        <div class="form-group col-md-3">
+                                            <label for="branch">{% trans "Currency" %}</label>
+                                            <select id="inputState" class="form-control">
+                                                {% for currency in currencies  %}
+                                                    <option value="{{ currency.id }}">
+                                                    {{ currency.code }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    {% endcomment %}
+                                <div class="form-group col-md-4">
+                                    <label class="form-control-label"
+                                    for="{{ form.start_time.id_for_label }}">{% trans "Start Time " %}</label>
+                                    {% render_field form.start_time|add_class:"form-control form-control-alternative"%}
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-control-label"
+                                    for="{{ form.end_time.id_for_label }}">{% trans "End Time " %}</label>
+                                    {% render_field form.end_time|add_class:"form-control form-control-alternative"%}
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-control-label"
+                                    for="{{ form.sold_time.id_for_label }}">{% trans "Sold Time " %}</label>
+                                    {% render_field form.sold_time|add_class:"form-control form-control-alternative"%}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 offset-4">
+                                    <button type="submit" class="btn btn-success btn-block">{% trans "Update" %}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
+{% block extrajs %}{% endblock extrajs %}
+
+
+
+

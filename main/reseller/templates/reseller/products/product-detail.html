@@ -1,0 +1,66 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "RESELLER" %}{% endblock title %}
+{% block extracss %}
+<link href='https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="{% static 'reseller/css/detail.css' %}" />
+{% endblock extracss %}
+{% block content %}
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="alert alert-light alert-elevate" role="alert">
+		<div class="kt-portlet kt-portlet--mobile">
+			<div class="kt-portlet__head kt-portlet__head--lg">
+				<div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+					    <i class="kt-font-brand flaticon2-line-chart"></i>
+					</span>
+					<h3 class="kt-portlet__head-title"> {% trans "YEMEK KALMASIN PRODUCT DETAIL" %}</h3>
+				</div>
+				<div class="kt-portlet__head-toolbar">
+					<div class="kt-portlet__head-wrapper">
+				</div>
+			</div>	
+		</div>
+    <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0"> {{product.template.name|upper}}</h3>
+            </div>
+            <div class="col-4 text-right">
+              <a href="{% url "reseller:update_product" product.pk %}" class="btn btn-sm btn-info">{% trans "Update" %}</a>
+              <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-upper" id="delete-{{ product.id }}" 
+			  onclick="delete_product({{ product.id }});" style="background-color:#fd1361;">{% trans "Delete" %}</a>
+              <a href="{% url 'reseller:product_list' %}" class="btn btn-sm btn-primary">{% trans "View All" %}</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+			<div class="b-class">
+			<h1 class="head">{{product.template.name|upper}}</h1>
+			<h2 class="name">{{product.branch}}&nbsp;{{product.user}}</h2>
+				<div class="products" style="background-image: url('/media/{{product.template.image}}')";>
+				<p class="one">{% trans "Product Count" %}&nbsp;{{product.count}}
+				<span class="org_price">{{product.original_price}}&nbsp;{{product.template.currency}}</span>
+				<span class="price">{{product.price}}&nbsp;{{product.template.currency}}</span><br />
+				<small class="two">
+				<a class="st_product">{% trans "Start Time:" %}{{product.start_time|upper}}</a>
+				<a class="en_product">{% trans "End Time:" %}{{product.end_time|upper}}</a>
+				<a class="sd_product">{% trans "Sold Time:" %}{{product.sold_time|upper}}</a>
+				<a class="lf_product">{% trans "Product Left:" %}{{product.left}}</a>
+				<a class="pr_product">{% trans "Product Price:" %}{{product.price}}</a>
+				<a class="or_product">{% trans " Original Price:" %}{{product.original_price}}</a>
+				</small></p>
+				</div>
+			</div>
+		</div>
+ 	</div>
+</div>
+</div>
+</div>
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript" src="/test/wp-content/themes/child/script/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="{% static 'reseller/js/detail.js' %}"></script>
+<script type="text/javascript" src="{% static 'reseller/js/product-delete.js' %}"></script>
+{% endblock extrajs %}

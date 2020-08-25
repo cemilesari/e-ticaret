@@ -1,0 +1,23 @@
+{% extends "web/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Profile" %}{% endblock title %}
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{% static 'web/css/wizard.css' %}" />
+{% endblock extracss %}
+{% block content %}
+
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+	<div class="kt-portlet">
+		<div class="kt-portlet__body kt-portlet__body--fit">
+			<div class="kt-grid kt-wizard-v1 kt-wizard-v1--white" id="kt_wizard_v1" data-ktwizard-state="first">
+				<div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript" src="{% static 'web/js/wizard.js' %}"></script>
+{% endblock extrajs %}

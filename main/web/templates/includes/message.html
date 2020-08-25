@@ -1,0 +1,13 @@
+{% for message in messages %}
+<div class="messages">
+  <div class="alert alert-dismissable bg-{% if message.tags %}{{message.tags|lower}}{% endif %}">
+      <div class="row">
+        <div class="col-md-11">
+          <p class="mb-0 alert-p">{{ message|safe }}
+        </div>
+        <div class="col-md-1">
+          <button style="align:right" type="button" class="close pt-2" data-dismiss="alert">×</button></p>
+        </div>
+  </div>
+</div>
+{% endfor %}

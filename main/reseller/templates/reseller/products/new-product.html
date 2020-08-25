@@ -1,0 +1,139 @@
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "RESELLER" %}{% endblock title %}
+{% block extracss %}{% endblock extracss %}
+{% block content %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+    <div class="alert alert-light alert-elevate" role="alert">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+	                    <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">{% trans "YEMEK KALMASIN CREATE PRODUCT" %}</h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+            </div>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+    </div>
+    <div class="kt-portlet__body kt-portlet__body--fit">
+        <div class="kt-datatable1" id="base_column_width">
+            <div class="">
+                 <form class="needs-validation" method="post" action="{% url 'reseller:create_product' %}" novalidate>
+                        {% csrf_token %}
+                        <div class="pl-lg-4">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="form.template.id_for_label">{% trans "Template" %}</label>
+                                    <select id="form.template.id_for_label" name="template" class="form-control" required>
+                                        {% for temp in templates %}
+                                            <option value="{{ temp.id }}" >
+                                        {{ temp.name }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <!--if template branch == ? -->
+                                 <div class="form-group col-md-4">
+                                    <label for="form.branch.id_for_label">{% trans "Branch" %}</label>
+                                    <select id="form.branch.id_for_label" name="branch" class="form-control" required>
+                                        {% for branc in branches %}
+                                            <option value="{{ branc.id }}">
+                                        {{ branc.name }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                 <div class="form-group col-md-4">
+                                   <div class="form-group">
+                                        <label for="status">{% trans "Status " %}</label>
+                                        <select id="status" name="status" class="form-control" required>
+                                            {% for stat in status %}
+                                            <option value="{{stat.0}}">
+                                            {{stat.1}}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="form-group">
+                                        <label for="left">{% trans "Left" %}</label>
+                                        <input id="left" type="number" class="form-control" name="left" placeholder="Left" required>
+                                        <span class="form-text text-muted">{% trans "Please enter your Company Name" %}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+									<div class="form-group">
+										<label for="count">{% trans "Count" %}</label>
+										<input id="count"type="number" class="form-control" name="count" placeholder="Count" required>
+										<span class="form-text text-muted">{% trans "Please enter your Count Name" %}</span>
+									</div>
+								</div>
+                                <div class="form-group col-md-3">
+                                    <div class="form-group">
+                                        <label for="price">{% trans "Price" %}</label>
+                                        <input type="number" id="price" class="form-control" name="price" placeholder="Price" required>
+                                        <span class="form-text text-muted">{% trans "Please enter your Count Name" %}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="form-group">
+                                        <label for="org_price">{% trans "Original Price" %}</label>
+                                        <input id="org_price" type="number" class="form-control" name="original_price" placeholder="Original Price" required>
+                                        <span class="form-text text-muted">{% trans "Please enter your Count Name" %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-4">
+                                    <div class="form-group">
+                                        <label  for="start_time">{% trans "Start Time " %}</label>
+                                        <input  id="start_time" type="time" class="form-control" name="start_time" required>
+                                        <span class="form-text text-muted">{% trans "Please enter your Start Time example 12.00 AM or PM format " %}</span>
+                                    </div>
+                                </div>  
+                                <div class="col-xl-4">
+                                    <div class="form-group">
+                                        <label for="end_time">{% trans "End Time " %}</label>
+                                        <input id="end_time" type="time" class="form-control" name="end_time" required>
+                                        <span class="form-text text-muted">{% trans "Please enter your Start Time example 12.00 AM or PM format " %}</span>
+                                    </div>
+                                </div>  
+                                <div class="col-xl-4">
+                                    <div class="form-group">
+                                        <label for= "sold_time" >{% trans "Sold Time " %}</label>
+                                        <input id = "sold_time" type="time" class="form-control" name="sold_time" required>
+                                        <span class="form-text text-muted">{% trans "Please enter your Start Time example 12.00 AM or PM format " %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-4 offset-4">
+                                    <button type="submit" class="btn btn-success btn-block">{% trans "Create" %}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+        </div>
+            </div>
+                </div>
+                    </div>
+{% endblock content %}
+{% block extrajs %}
+
+{% endblock extrajs %}

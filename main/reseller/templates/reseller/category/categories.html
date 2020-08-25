@@ -1,0 +1,56 @@
+
+{% extends "reseller/base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Category List" %}{% endblock title %}
+{% block extracss %}
+<style rel="stylesheet" type="text/css">
+a:hover {
+  background-color: #2ba591;
+}
+</style>
+
+{% endblock extracss %}
+{% block content %}
+{% load i18n %}
+<!--collapse ekle          https://getbootstrap.com/docs/4.4/components/collapse/                  -->
+<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--mobile">
+	    <div class="kt-portlet__head kt-portlet__head--lg">
+		    <div class="kt-portlet__head-label">
+			    <span class="kt-portlet__head-icon">
+				    <i class="kt-font-brand flaticon2-line-chart"></i>
+			    </span>
+			    <h3 class="kt-portlet__head-title">
+				    {% trans "Category List" %}
+				    <small>{% trans "Categories" %}</small>
+			    </h3>
+		    </div>
+		<div class="kt-portlet__head-toolbar">
+            <div class="kt-portlet__head-wrapper">
+	            <div class="">
+		            <a href="{% url 'reseller:category_create' %}" type="button" class="btn btn-brand btn-icon-sm" >
+			        <i class="flaticon2-plus"></i> {% trans "Add New" %}
+	    	        </a>
+	            </div>
+            </div>		
+        </div>
+    </div>
+    <div style="line-height:2;"  class="kt-portlet__body">
+		{% include 'includes/message.html' %}
+		{% for category in  categories %}
+		<a href="{% url 'reseller:category_detail' category.pk %}">
+		<div class="alert alert-light alert-elevate fade show" role="alert">
+			<div class="alert-icon">	
+				<i style="color: #9851a9;font-size:1rem;" class="flaticon-star"></i>
+			</div>
+			<div class="alert-text">
+				{{category.name|upper}}
+			</div>
+		</div>
+		</a>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock content %}
+{% block extrajs %}{% endblock extrajs %}

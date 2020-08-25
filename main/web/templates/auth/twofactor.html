@@ -1,0 +1,34 @@
+{% extends 'auth/base.html' %}
+{% load static i18n %}
+{% block content %}
+<div class="col-lg-4  bg-white">
+    <div class="row align-items-center m-h-100">
+        <div class="mx-auto col-md-8">
+            <div class="p-b-20 text-center">
+                <p>
+                    <a href="{% url 'web:home_view' %}">
+                        <img src="{% static 'assets/img/logo/kk/kk-lg.png' %}" width="80" alt="">
+                    </a>
+                </p>
+                <p class="admin-brand-content">{% trans "KrakenKube Verification" %}</p>
+            </div>
+            {% include 'includes/message.html' %}
+            <form class="needs-validation" action="{% url 'users:two_factor_verification' %}" method="POST">
+                {% csrf_token %}
+                {% if request.resolver_match.kwargs.sso == 'sso' %}
+                    <input type="hidden" name="sso" value="sso">
+                {% endif %}
+                <div class="form-row">
+                    <div class="form-group floating-label col-md-12">
+                        <label>{% trans "2-Step Verification" %} </label>
+                        <input type="text" name="code" class="form-control" placeholder="{% trans 'Verification Code' %}" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">{% trans "Verify" %}</button>
+            </form>
+         <br>
+        </div>
+    </div>
+</div>
+<div class="col-lg-8 d-none d-md-block bg-cover" style="background-image: url('{% static 'portal/img/auth.svg' %}');"></div>
+{% endblock content %}
